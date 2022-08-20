@@ -1,6 +1,9 @@
 body {
+    font-family: "rubik";
+    margin: 0;
     max-width: 1920px;
     max-height: 1080px;
     background-image: url("../../assets/hero-bg.jpg");
-    background-size: 100vw;
+    background-size: 100%;  
+    background-repeat: no-repeat;
 }
