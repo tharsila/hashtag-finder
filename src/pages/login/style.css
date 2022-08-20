@@ -1,9 +1,8 @@
 body {
     font-family: "rubik";
     margin: 0;
-    max-width: 1920px;
-    max-height: 1080px;
+    max-width: 1200px;
     background-image: url("../../assets/hero-bg.jpg");
-    background-size: 100%;  
+    background-size: cover;  
     background-repeat: no-repeat;
-}
+};
