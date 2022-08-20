@@ -1,7 +1,12 @@
+import React from "react";
+import Login from "./pages/login/login"
 
 function App() {
   return (
-    <h1>Olá mundo!</h1>
+    <div>
+      <h1>Olá mundo!</h1>
+    <Login/>
+    </div>
   );
 }
 
