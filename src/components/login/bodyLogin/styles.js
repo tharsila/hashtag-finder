@@ -36,4 +36,11 @@ background: rgba(255, 255, 255, 0);
     font-size: 10px;
     letter-spacing: 1px;
 }
+
+&:focus {
+    outline: none !important;
+    boder: 1px solid blue;
+    color: white;
+    box-shadow: 0 0 10px #719ECE;
+}
 `
