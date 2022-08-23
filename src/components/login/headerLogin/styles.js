@@ -11,6 +11,9 @@ export const Head = styled.header`
     opacity: 1;
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
+    @media (max-width: 425px){
+    
+    }
 `
 
 export const Span = styled.span`
@@ -20,6 +23,12 @@ export const Span = styled.span`
     margin-left: 64px;
     letter-spacing: 0;
     font: normal normal normal 30px/27px Rubik;
+    @media(max-width: 425px){
+            width: auto;
+            height: auto;
+            font-size: 18px;
+            margin-left: 16px;
+        }
 `
 
 export const Button = styled.button`
@@ -45,4 +54,11 @@ align-items: center;
 width: 120px;
 margin-left: auto;
 margin-right: auto;
+    @media(max-width: 425px){
+        width: 97px;
+        height: 30px;
+        margin-right: 16px;
+        font-size: 11px;
+        padding-inline: 12px;
+    }
 `

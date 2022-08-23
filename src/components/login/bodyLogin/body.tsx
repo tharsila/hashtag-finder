@@ -17,6 +17,8 @@ const LoginUser = () => {
             let email = e.target.value 
                 if (validator.isEmail(email)) {
                 setEmail(email);
+            } else if(email === ""){
+                
             } else {
                 alert("Enter a valid e-mail")
                 e.target.value = ""

@@ -1,7 +1,6 @@
 import React from "react";
-import {Head, Span, Button} from "./styles";
+import {Head, Span, ButtonForm} from "./styles";
 import {ReactComponent as IconHome} from "../../../assets/iconHome.svg";
-
 function Header() {
     return(
         <div>
@@ -9,7 +8,7 @@ function Header() {
             <Span>
                 hashtag<strong>finder</strong>
             </Span>    
-            <Button><IconHome/> HOME</Button>
+            <ButtonForm><IconHome/>HOME</ButtonForm>
         </Head>
         </div>
     )
