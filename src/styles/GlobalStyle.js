@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import img from "../assets/heroBg.jpg";
-import img2 from "../assets/mobileHeroBg.jgp";
+import img2 from "../assets/mobileHeroBg.jpg";
 
 export default createGlobalStyle`
 body{
@@ -11,7 +11,7 @@ body{
     background-size: cover;  
     background-repeat: no-repeat;
         @media(max-width: 428px){
-            background-image: url(${img2});
+            background-image: url(${img2})
         }
 }
 `
