@@ -1,8 +1,11 @@
 body {
     font-family: "rubik";
-    margin: 0;
-    max-width: 1200px;
-    background-image: url("../../assets/hero-bg.jpg");
-    background-size: cover;  
-    background-repeat: no-repeat;
-};
+margin: 0;
+max-width: 1200px;
+background-image: url("../../assets/hero-bg");
+background-size: cover;  
+background-repeat: no-repeat;
+    @media(max-width: 428px){
+        background-image: url("../../assets/mobile-hero-bg")
+    }
+}

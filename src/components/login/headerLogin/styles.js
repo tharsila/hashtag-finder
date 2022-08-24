@@ -47,13 +47,6 @@ export const Button = styled.button`
     font: normal normal bold 15px/13px Rubik;
     opacity: 1;
     padding-inline: 23px;
-`
-
-export const ButtonForm = styled(Button)`
-align-items: center;
-width: 120px;
-margin-left: auto;
-margin-right: auto;
     @media(max-width: 425px){
         width: 97px;
         height: 30px;
@@ -61,4 +54,18 @@ margin-right: auto;
         font-size: 11px;
         padding-inline: 12px;
     }
+`
+
+export const ButtonForm = styled(Button)`
+align-items: center;
+width: 120px;
+margin-left: auto;
+margin-right: auto;
+@media(max-width: 428px){
+    width: 213px;
+    height: 58px;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-top: 50px;
+}
 `

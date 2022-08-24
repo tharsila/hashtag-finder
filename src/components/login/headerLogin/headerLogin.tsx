@@ -1,5 +1,5 @@
 import React from "react";
-import {Head, Span, ButtonForm} from "./styles";
+import {Head, Span, Button} from "./styles";
 import {ReactComponent as IconHome} from "../../../assets/iconHome.svg";
 function Header() {
     return(
@@ -8,7 +8,7 @@ function Header() {
             <Span>
                 hashtag<strong>finder</strong>
             </Span>    
-            <ButtonForm><IconHome/>HOME</ButtonForm>
+            <Button><IconHome/>HOME</Button>
         </Head>
         </div>
     )
