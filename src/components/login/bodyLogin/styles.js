@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { Button } from "../headerLogin/styles"
 
 export const Form = styled.form`
 width: 378px;
@@ -12,12 +13,15 @@ flex-direction: column;
 background: rgb(0 0 0 / 26%);
 border-radius: 14px;
 backdrop-filter: blur(30px);
+margin-bottom: 100px;
     @media (max-width: 428px){
-        margin-top: 136px;
-        width: 340px;
-        height: 460px;
+        margin-top: 60px;
+        width: 85%;
+        position: relative;
+        height: 400px;
         margin-right: auto;
         margin-left: auto;
+        margin-bottom: 100px;
     }
 `
 
@@ -55,3 +59,16 @@ background: rgba(255, 255, 255, 0);
     box-shadow: 0 0 10px #719ECE;
 }
 `
+
+export const ButtonForm = styled(Button)`
+align-items: center;
+width: 120px;
+margin-left: auto;
+margin-right: auto;
+@media(max-width: 428px){
+    width: 213px;
+    height: 58px;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-top: 32px;
+}`

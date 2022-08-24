@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ButtonForm } from "../headerLogin/styles";
+import { ButtonForm } from "./styles";
 import { Form, H3, Input } from "./styles";
 import validator from 'validator';
 

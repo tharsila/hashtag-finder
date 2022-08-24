@@ -48,7 +48,7 @@ export const Button = styled.button`
     opacity: 1;
     padding-inline: 23px;
     @media(max-width: 425px){
-        width: 97px;
+        width: 102px;
         height: 30px;
         margin-right: 16px;
         font-size: 11px;
@@ -56,16 +56,4 @@ export const Button = styled.button`
     }
 `
 
-export const ButtonForm = styled(Button)`
-align-items: center;
-width: 120px;
-margin-left: auto;
-margin-right: auto;
-@media(max-width: 428px){
-    width: 213px;
-    height: 58px;
-    font-size: 18px;
-    text-transform: uppercase;
-    margin-top: 50px;
-}
-`
+
