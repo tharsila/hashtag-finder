@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const PostContainer = styled.section`
   background: #0A1744;
-  padding-top: 150px;
+  padding: 150px 0;
 
   h3 {
     text-align: center;
@@ -59,7 +59,7 @@ export const PostCardContainer =  styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 20px;
+  gap: 30px;
 `
 
 export const PostCard = styled.div`
