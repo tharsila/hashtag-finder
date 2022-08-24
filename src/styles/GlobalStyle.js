@@ -10,7 +10,7 @@ body{
     background-image:url(${img});
     background-size: cover;  
     background-repeat: no-repeat;
-        @media(max-width: 428px){
+        @media(max-width: 767px){
             background-image: url(${img2})
         }
 }

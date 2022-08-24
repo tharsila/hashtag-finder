@@ -11,9 +11,6 @@ export const Head = styled.header`
     opacity: 1;
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
-    @media (max-width: 425px){
-    
-    }
 `
 
 export const Span = styled.span`
@@ -23,7 +20,7 @@ export const Span = styled.span`
     margin-left: 64px;
     letter-spacing: 0;
     font: normal normal normal 30px/27px Rubik;
-    @media(max-width: 425px){
+    @media(max-width: 767px){
             width: auto;
             height: auto;
             font-size: 18px;

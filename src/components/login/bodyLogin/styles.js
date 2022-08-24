@@ -14,7 +14,7 @@ background: rgb(0 0 0 / 26%);
 border-radius: 14px;
 backdrop-filter: blur(30px);
 margin-bottom: 100px;
-    @media (max-width: 428px){
+    @media (max-width: 767px){
         margin-top: 60px;
         width: 85%;
         position: relative;
@@ -31,7 +31,7 @@ text-align: center;
 font: normal normal bold 25px/21px Rubik;
 letter-spacing: 0px;
 margin: 100px 0 50px 0;
-@media (max-width: 428px){
+@media (max-width: 767px){
     margin: 62px 0 50px 0;
     font-size: 34px;
 }
