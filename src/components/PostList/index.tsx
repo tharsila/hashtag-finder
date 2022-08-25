@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, ChangeEvent, MouseEvent } from 'react'
 import * as C from './styles'
 
 interface InfoTwitter {
@@ -94,13 +94,30 @@ const info: Array<InfoTwitter> = [
 ]
 
 const PostList = () => {
+  const [showTweet, setShowTweet] = useState<boolean>(false);
+  const [showImage, setShowImage] = useState<boolean>(false);
+
+  const changeLink = (e:any) => {
+    if (e.target.innerText === 'Tweets') {
+      setShowTweet(true)
+      setShowImage(false)
+    } else {
+      setShowTweet(false)
+      setShowImage(true)
+    }
+  }
+ 
   return (
-    <C.PostContainer>
+    <C.PostContainer showImage={showImage} showTweet={showTweet}>
       <h3>Exibindo os 10 resultados mais recentes para #natureza</h3>
+      <div className="choose">
+        <span onClick={changeLink}>Tweets</span>
+        <span onClick={changeLink}>Imagens</span>
+      </div>
       <C.PostContent>
-        <C.PostGrid>
-          {info.map((item) => (
-            <C.PostImg>
+        <C.PostGrid showImage={showImage}>
+          {info.map((item, index) => (
+            <C.PostImg key={index}>
               <img src={item.postImg} alt="" />
               <C.TwitterInfo>
                 <p>Postado por:</p>
@@ -110,9 +127,9 @@ const PostList = () => {
           ))}
         </C.PostGrid>
         
-        <C.PostCardContainer>
-          {info.map((item) => (
-            <C.PostCard>
+        <C.PostCardContainer showTweet={showTweet}>
+          {info.map((item, index) => (
+            <C.PostCard key={index}>
               <div className='userPhoto'>
                 <img src={item.userPhoto} alt="" />
               </div>
@@ -123,7 +140,6 @@ const PostList = () => {
                 <a href="">Ver mais no Twitter</a>
               </div>
             </C.PostCard>
-
           ))}
         </C.PostCardContainer>
       </C.PostContent>

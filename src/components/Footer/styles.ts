@@ -9,5 +9,8 @@ export const Footer = styled.footer`
     font-weight: 400;
     color: #FFFFFF;
     text-align: center;
+    @media(max-width: 500px) {
+      font-size: 10px;
+    }
   }
 `
