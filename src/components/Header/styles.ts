@@ -12,7 +12,6 @@ export const Container = styled.div`
   
   @media(max-width: 500px) {
     background-image:url("/mobile-hero-bg.jpg");
-    height: 90vh;
   }
 `
 export const HeaderBG = styled.header`
