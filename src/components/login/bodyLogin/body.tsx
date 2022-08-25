@@ -27,7 +27,13 @@ const LoginUser = () => {
 
         //Funtion for set password user//
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
+        let password = e.target.value
+        if(validator.isStrongPassword(password)) {
+            setPassword(e.target.value);
+        } else if (password === "") {} else {
+            alert("Enter a strong password")
+            e.target.value = ""
+        }
     };
 
 
