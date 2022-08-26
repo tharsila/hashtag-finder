@@ -1,4 +1,4 @@
-import { ButtonContainer, Icon } from "./styles";
+import * as C from "./styles";
 
 type Props = {
   icon: string;
@@ -9,9 +9,12 @@ type Props = {
 
 export const Button = ({ icon, text, color, backgroundColor }: Props) => {
   return (
-    <ButtonContainer color={color} backgroundColor={backgroundColor}>
-      <Icon src={require(`../../images/${icon}`)} />
+    <C.ButtonContainer
+      color={color}
+      backgroundColor={backgroundColor}
+    >
+      <C.Icon src={require(`../../images/${icon}`)} />
       <span>{text}</span>
-    </ButtonContainer>
+    </C.ButtonContainer>
   );
 };

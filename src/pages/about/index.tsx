@@ -1,15 +1,4 @@
-import {
-    AboutArea,
-    AboutProject,
-    Text,
-    Title,
-    Container,
-    WhoWeAre,
-    Card,
-    Cards,
-    Avatar,
-    Icons,
-} from './styles';
+import * as C from './styles';
 import aboutIlustration from '../../images/about-ilustration.svg';
 import alexAvatar from '../../images/alex.jpg';
 import arthurAvatar from '../../images/arthur.jpg';
@@ -50,7 +39,7 @@ export const About = () => {
     ];
 
     return (
-        <Container>
+        <C.Container>
             <Header>
                 <div>
                     <Button
@@ -67,13 +56,17 @@ export const About = () => {
                     />
                 </div>
             </Header>
-            <AboutArea>
-                <AboutProject>
+            <C.AboutArea>
+                <C.AboutProject>
                     <div>
-                        <Title id="aboutTitle" fontSize={65} fontColor={'#FFF'}>
+                        <C.Title
+                            id="aboutTitle"
+                            fontSize={65}
+                            fontColor={'#FFF'}
+                        >
                             Sobre o projeto
-                        </Title>
-                        <Text
+                        </C.Title>
+                        <C.Text
                             id="aboutText"
                             fontSize={18}
                             lineHeight={1.8}
@@ -95,33 +88,43 @@ export const About = () => {
                             voluptates magnam aliquam quae eaque! Lorem ipsum
                             dolor sit amet consectetur adipisicing elit.
                             Voluptatem, labore.
-                        </Text>
+                        </C.Text>
                     </div>
                     <img
                         id="aboutIlustration"
                         src={aboutIlustration}
                         alt="About ilustration"
                     />
-                </AboutProject>
-                <WhoWeAre>
-                    <Title id="whoWeAreTitle" fontSize={54} fontColor={'#FFF'}>
+                </C.AboutProject>
+                <C.WhoWeAre>
+                    <C.Title
+                        id="whoWeAreTitle"
+                        fontSize={54}
+                        fontColor={'#FFF'}
+                    >
                         Quem somos
-                    </Title>
-                    <Cards>
+                    </C.Title>
+                    <C.Cards>
                         {peoples.map((people) => (
-                            <Card key={people.name + people.description}>
-                                <Avatar src={people.avatar} alt="Avatar" />
-                                <Title fontSize={25} fontColor={'#72EFDB'}>
+                            <C.Card key={people.name + people.description}>
+                                <C.Avatar
+                                    src={people.avatar}
+                                    alt="Avatar"
+                                />
+                                <C.Title
+                                    fontSize={25}
+                                    fontColor={'#72EFDB'}
+                                >
                                     {people.name}
-                                </Title>
-                                <Text
+                                </C.Title>
+                                <C.Text
                                     fontSize={16}
                                     lineHeight={1.5}
                                     marginTop={20}
                                 >
                                     {people.description}
-                                </Text>
-                                <Icons>
+                                </C.Text>
+                                <C.Icons>
                                     <a href="">
                                         <img
                                             src={githubIcon}
@@ -129,7 +132,10 @@ export const About = () => {
                                         />
                                     </a>
                                     <a href="">
-                                        <img src={emailIcon} alt="Email icon" />
+                                        <img
+                                            src={emailIcon}
+                                            alt="Email icon"
+                                        />
                                     </a>
                                     <a href="">
                                         <img
@@ -137,12 +143,12 @@ export const About = () => {
                                             alt="LinkedIn icon"
                                         />
                                     </a>
-                                </Icons>
-                            </Card>
+                                </C.Icons>
+                            </C.Card>
                         ))}
-                    </Cards>
-                </WhoWeAre>
-            </AboutArea>
-        </Container>
+                    </C.Cards>
+                </C.WhoWeAre>
+            </C.AboutArea>
+        </C.Container>
     );
 };
