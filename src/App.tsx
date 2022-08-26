@@ -1,8 +1,7 @@
+import TableSearch from './components/TableSearch';
 
 function App() {
-  return (
-    <h1>Olá mundo!</h1>
-  );
+  return <TableSearch />;
 }
 
 export default App;
