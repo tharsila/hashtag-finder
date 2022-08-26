@@ -21,7 +21,7 @@ export const Container = styled.div`
 
 export const AboutArea = styled.div`
     margin: auto;
-    padding-top: 100px;
+    padding-top: 200px;
     max-width: 1300px;
     width: 90%;
     display: flex;

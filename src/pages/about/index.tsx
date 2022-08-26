@@ -7,6 +7,8 @@ import kaiqueAvatar from "../../images/kaique.jpg";
 import githubIcon from "../../images/icon-github.svg";
 import emailIcon from "../../images/icon-envelope.svg";
 import linkedinIcon from "../../images/icon-awesome-linkedin.svg";
+import { Header } from "../../components/Header";
+import { Button } from "../../components/Button";
 
 export const About = () => {
 
@@ -19,6 +21,22 @@ export const About = () => {
 
     return (
         <Container>
+            <Header>
+                <div>
+                    <Button
+                        icon='icon-info-circle.svg'
+                        text='SOBRE'
+                        color='#0B1741'
+                        backgroundColor='#72EFDB'
+                    />
+                    <Button
+                        icon='icon-user-alt.svg'
+                        text='LOGIN'
+                        color='#FFFFFF'
+                        backgroundColor='#1E3E7B'
+                    />
+                </div>
+            </Header>
             <AboutArea>
                 <AboutProject>
                     <div>
