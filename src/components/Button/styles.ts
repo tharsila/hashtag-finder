@@ -32,7 +32,7 @@ export const ButtonContainer = styled.button(({ color, backgroundColor }: { colo
         font-size: 12px;
         margin-left: 15px;
     }
-    @media (min-width: 502px) and (max-width: 1000px) {
+    @media (min-width: 671px) and (max-width: 1000px) {
         width: 144px;
         height: 41px;
         font-size: 14px;
