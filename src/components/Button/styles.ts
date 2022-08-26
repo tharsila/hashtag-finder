@@ -19,10 +19,29 @@ export const ButtonContainer = styled.button(({ color, backgroundColor }: { colo
     &:hover {
         filter: brightness(120%);
     }
+
+    @media (max-width: 500px) {
+        width: 86px;
+        height: 27px;
+        font-size: 10px;
+        margin-left: 10px;
+    }
+    @media (min-width: 501px) and (max-width: 670px) {
+        width: 100px;
+        height: 32px;
+        font-size: 12px;
+        margin-left: 15px;
+    }
 `));
 
 export const Icon = styled.img`
     margin-right: 10px;
     width: 13px;
     height: 13px;
+    text-align: center;
+
+    @media (max-width: 500px) and (max-width: 670px) {
+        margin-right: 5px;
+    }
+    
 `;

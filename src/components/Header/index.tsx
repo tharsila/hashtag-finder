@@ -1,6 +1,4 @@
 import * as C from "./styles";
-import Logo from "../../images/logo.svg"
-import { Button } from "../Button";
 
 export const Header = ({ children }: { children: JSX.Element }) => {
     return (

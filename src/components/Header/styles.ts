@@ -7,7 +7,14 @@ export const Container = styled.header`
     background-color: rgb(10, 23, 68, 75%);
     box-shadow: 0px 3px 29px #5538EE1F;
     backdrop-filter: blur(30px);
-    position: fixed; 
+    position: fixed;
+
+    @media (max-width: 500px) {
+        height: 82px;
+    }
+    @media (min-width: 501px) and (max-width: 1000px) {
+        height: 90px;
+    }
 `;
 
 export const Header = styled.div`
@@ -26,5 +33,12 @@ export const Logo = styled.div`
 
     #strong {
         font-weight: bold;
+    }
+
+    @media (max-width: 500px) {
+        font-size: 19px;
+    }
+    @media (min-width: 501px) and (max-width: 1000px) {
+        font-size: 27px;
     }
 `
