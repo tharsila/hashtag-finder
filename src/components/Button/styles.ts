@@ -28,9 +28,14 @@ export const ButtonContainer = styled.button(({ color, backgroundColor }: { colo
     }
     @media (min-width: 501px) and (max-width: 670px) {
         width: 100px;
-        height: 32px;
+        height: 30px;
         font-size: 12px;
         margin-left: 15px;
+    }
+    @media (min-width: 502px) and (max-width: 1000px) {
+        width: 144px;
+        height: 41px;
+        font-size: 14px;
     }
 `));
 
