@@ -19,6 +19,7 @@ export const ButtonContainer = styled.button(({ color, backgroundColor }: { colo
     &:hover {
         filter: brightness(120%);
     }
+
     @media (max-width: 500px) {
         width: 86px;
         height: 27px;
@@ -43,6 +44,7 @@ export const Icon = styled.img`
     width: 13px;
     height: 13px;
     text-align: center;
+
     @media (max-width: 500px) and (max-width: 670px) {
         margin-right: 5px;
     }

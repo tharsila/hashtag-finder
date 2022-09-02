@@ -1,6 +1,7 @@
 import { GlobalStyle } from "./App.styles";
 import PostList from './components/PostList';
 import Footer from './components/Footer';
+import { About } from "./pages/about";
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <GlobalStyle />
       <PostList />
       <Footer />
+      <About />
     </>
   );
 }
