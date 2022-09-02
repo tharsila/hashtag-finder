@@ -69,6 +69,7 @@ export const PostContent = styled.div`
   gap: 30px;
   padding: 0px 140px;
   margin-top: 100px;
+  max-width: 1300px;
   @media(max-width: 1150px) {
     justify-content: center;
     padding: 0px 20px;

@@ -3,8 +3,15 @@ import styled from 'styled-components';
 export const ContentInfo = styled.div`
   color: #FFFFFF;
   padding-left: 135px;
+  max-width: 1300px;
+  width: 90%;
+
   @media(max-width: 990px) {
     padding: 25px;
+  }
+
+  @media(max-width: 500px) {
+    width: 100%;
   }
 
   .space-top {
@@ -14,7 +21,7 @@ export const ContentInfo = styled.div`
   h1 {
     font-size: 70px;
     font-weight: bold;
-    width: 55%;
+    width: 60%;
     margin-bottom: 30px;
     
     @media(max-width: 990px) {
@@ -30,15 +37,19 @@ export const ContentInfo = styled.div`
   p {
     font-size: 31px;
     font-weight: 400;
-    width: 50%;
+    width: 55%;
+
     @media(max-width: 990px) {
       width: 100%;
     }
     @media(max-width: 500px) {
       font-size: 16px;
+      width: 90%;
     }
   }
 `
+
+
 export const InputContainer = styled.div`
   display: flex;
   justify-content: center;
