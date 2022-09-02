@@ -15,7 +15,6 @@ export const Container = styled.div`
   }
 `
 export const HeaderBG = styled.header`
- /*  background: #0A1744; */
   box-shadow: 0px 3px 29px #5538EE1F;
   backdrop-filter: blur(30px);
   color: #FFFFFF;
@@ -47,48 +46,26 @@ export const Content = styled.div`
   }
 `
 
-export const Btns = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
+export const Header = styled.div`
+    margin: 0 auto;
+    max-width: 1300px;
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
 
-  a:first-child {
-    background:  #72EFDB;
-    color: #0B1741;
-  }
-
-  a:last-child {
-    background: #1E3E7B;
-    color: #FFFFFF;
-  }
-
-  a:first-child, a:last-child {
-    padding: 10px 25px;
-    border-radius: 25px;
-    font-weight: bold;
-    font-size: 17px;
-    text-transform: uppercase;
-    letter-spacing: 2.55px;
-
-    @media(max-width: 700px) {
-      padding: 8px 18px;
-      font-size: 15px;
+export const Logo = styled.div`
+    font-size: 35px;
+    color: #FFF;
+    #strong {
+        font-weight: bold;
     }
-
-    @media(max-width: 500px) {
-      font-size: 10px;
+    @media (max-width: 500px) {
+        font-size: 19px;
     }
-  }
-
-  img {
-    margin-right: 15px;
-    @media(max-width: 500px) {
-      width: 10px;
+    @media (min-width: 501px) and (max-width: 1000px) {
+        font-size: 27px;
     }
-
-    @media(max-width:390px) {
-      display: none;
-    }
-  }
 `
