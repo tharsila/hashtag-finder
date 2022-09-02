@@ -11,7 +11,7 @@ const InfoHero = () => {
       <C.InputContainer>
         <C.Input>
           <button>
-            <img src={require('../../assets/icon-search.svg').default} alt="" />
+            <img src={require('../../images/icon-search.svg').default} alt="" />
           </button>
           <input type="text" placeholder="Buscar..." />
         </C.Input>
