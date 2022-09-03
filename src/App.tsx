@@ -5,16 +5,15 @@ import PostList from './components/PostList';
 import Footer from './components/Footer';
 import { About } from "./pages/about";
 
+import AppRoutes from "./AppRoutes"
+
 function App(){
   return (
     <>
       <GlobalStyle />
-      <Login />
-      <PostList />
-      <Footer />
-      <About />
+     <AppRoutes />
     </>
   );
-};
+}; 
 
 export default App;
