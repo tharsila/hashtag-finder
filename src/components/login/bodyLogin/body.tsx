@@ -13,12 +13,11 @@ const LoginUser = () => {
 
         //function that validates email 
         const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
-            let email = e.target.value 
-                if (validator.isEmail(email)) {
+            let testEmail = e.target.value;
+            if (validator.isEmail(testEmail)) {
                 setEmail(email);
-            } else if(email === ""){
-                
+            } else if(testEmail === ""){
+                alert("Email field cannot be empty")
             } else {
                 alert("Enter a valid e-mail")
                 e.target.value = ""
@@ -26,15 +25,13 @@ const LoginUser = () => {
     };
 
         //Funtion for set password user//
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let password = e.target.value
-        if(validator.isStrongPassword(password)) {
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => { 
+            if(e.target.value === ""){
+                alert("Password field cannot be empty")
+            } else {
             setPassword(e.target.value);
-        } else if (password === "") {} else {
-            alert("Enter a strong password")
-            e.target.value = ""
-        }
-    };
+            }
+        };
 
 
 
@@ -45,12 +42,11 @@ const LoginUser = () => {
             <Input type="email"
                 placeholder="Usuário"
                 name="e-mail"
-                onBlur={(e) => { handleEmailChange(e) }}
+                onBlur = {(e) => { handleEmailChange(e) }}
             />
             <Input type="password"
                 placeholder="Senha"
-                onChange={(e) => { handlePasswordChange(e) }}
-                required
+                onBlur = {(e) => { handlePasswordChange(e) }}
             />
             <ButtonForm>
                 Acessar
