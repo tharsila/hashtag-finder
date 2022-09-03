@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { Button } from "../headerLogin/styles"
 import background from "../../../images/hero-bg.jpg"
+import Mobile from "../../../images/mobileHeroBg.jpg" 
 
 export const Form = styled.form`
 width: 378px;
@@ -78,4 +79,8 @@ export const BodyLogin = styled.div`
 background-image: url(${background});
 height: 100vh;
 background-size: cover;
+    @media(max-width: 428px){
+        background-image: url(${Mobile});
+        background-size: cover;
+    }
 `
