@@ -1,4 +1,5 @@
 import * as C from "./styles";
+import React from 'react'
 
 export const Header = ({ children }: { children: JSX.Element }) => {
     return (

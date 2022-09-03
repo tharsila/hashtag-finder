@@ -1,4 +1,3 @@
-
 import { GlobalStyle } from "./App.styles";
 import Login from "./pages/login/login"
 import PostList from './components/PostList';

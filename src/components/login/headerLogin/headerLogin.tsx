@@ -1,6 +1,6 @@
 import React from "react";
 import {Head, Span, Button} from "./styles";
-import {ReactComponent as IconHome} from "../../../assets/iconHome.svg";
+import {ReactComponent as IconHome} from "../../../images/icon-home.svg";
 function Header() {
     return(
         <div>
