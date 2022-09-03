@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import { Button } from "../headerLogin/styles"
+import background from "../../../images/hero-bg.jpg"
 
 export const Form = styled.form`
 width: 378px;
@@ -72,3 +73,9 @@ margin-right: auto;
     text-transform: uppercase;
     margin-top: 32px;
 }`
+
+export const BodyLogin = styled.div`
+background-image: url(${background});
+height: 100vh;
+background-size: cover;
+`
