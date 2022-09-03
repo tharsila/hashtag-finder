@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent, MouseEvent } from 'react'
-import Header from '../../components/Header'
+import { Header } from '../../components/Header'
 import {Button} from '../../components/Button'
 import * as C from './styles'
 
@@ -167,4 +167,4 @@ const PostList = () => {
   )
 }
 
-export default PostList
+export default PostList;
