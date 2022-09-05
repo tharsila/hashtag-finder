@@ -36,6 +36,7 @@ export const AboutArea = styled.div`
 
 export const AboutProject = styled.div`
     display: flex;
+    justify-content: space-between;
     gap: 80px;
 
     @media(max-width: 1100px) {

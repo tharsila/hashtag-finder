@@ -1,6 +1,6 @@
 import * as C from "./styles";
 
-export const Header = ({ children }: { children: JSX.Element }) => {
+export const Header = ({ children }: { children: JSX.Element[] }) => {
     return (
         <C.Container>
             <C.Header>
@@ -8,7 +8,9 @@ export const Header = ({ children }: { children: JSX.Element }) => {
                     <span>hashtag</span>
                     <span id="strong">finder</span>
                 </C.Logo>
-                {children}
+                <div>
+                    {children}
+                </div>
             </C.Header>
         </C.Container>
     );
