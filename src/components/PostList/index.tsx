@@ -2,6 +2,9 @@ import React, { useState, ChangeEvent, MouseEvent } from 'react'
 import { Header } from '../../components/Header'
 import {Button} from '../../components/Button'
 import * as C from './styles'
+import InfoHero from '../InfoHero';
+import {Link} from 'react-router-dom'
+
 
 interface InfoTwitter {
   postImg:string;
@@ -111,22 +114,29 @@ const PostList = () => {
  
   return (
     <>
-      <Header>
-        <div>
-          <Button
-              icon="icon-info-circle.svg"
-              text="SOBRE"
-              color="#0B1741"
-              backgroundColor="#72EFDB"
-          />
-          <Button
-              icon="icon-user-alt.svg"
-              text="LOGIN"
-              color="#FFFFFF"
-              backgroundColor="#1E3E7B"
-          />
-        </div>
-      </Header>
+      <C.Container>
+        <Header>
+          <div>
+            <Link to = '/about'>
+              <Button
+                  icon="icon-info-circle.svg"
+                  text="SOBRE"
+                  color="#0B1741"
+                  backgroundColor="#72EFDB"
+              />
+            </Link>
+            <Link to ='/login'>
+              <Button
+                  icon="icon-user-alt.svg"
+                  text="LOGIN"
+                  color="#FFFFFF"
+                  backgroundColor="#1E3E7B"
+              />
+            </Link>
+          </div>
+        </Header>
+        <InfoHero/>
+      </C.Container>
       <C.PostContainer showImage={showImage} showTweet={showTweet}>
         <h3>Exibindo os 10 resultados mais recentes para #natureza</h3>
         <div className="choose">
