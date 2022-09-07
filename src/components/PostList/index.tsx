@@ -1,17 +1,17 @@
 import React, { useState, ChangeEvent, MouseEvent } from 'react'
 import { Header } from '../../components/Header'
-import {Button} from '../../components/Button'
+import { Button } from '../../components/Button'
 import * as C from './styles'
 import InfoHero from '../InfoHero';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 interface InfoTwitter {
-  postImg:string;
-  userName:string;
-  accountName:string;
-  userPhoto:string;
-  content:string;
+  postImg: string;
+  userName: string;
+  accountName: string;
+  userPhoto: string;
+  content: string;
 
 }
 
@@ -102,7 +102,7 @@ const PostList = () => {
   const [showTweet, setShowTweet] = useState<boolean>(false);
   const [showImage, setShowImage] = useState<boolean>(false);
 
-  const changeLink = (e:any) => {
+  const changeLink = (e: any) => {
     if (e.target.innerText === 'Tweets') {
       setShowTweet(true)
       setShowImage(false)
@@ -111,31 +111,29 @@ const PostList = () => {
       setShowImage(true)
     }
   }
- 
+
   return (
     <>
       <C.Container>
         <Header>
-          <div>
-            <Link to = '/about'>
-              <Button
-                  icon="icon-info-circle.svg"
-                  text="SOBRE"
-                  color="#0B1741"
-                  backgroundColor="#72EFDB"
-              />
-            </Link>
-            <Link to ='/login'>
-              <Button
-                  icon="icon-user-alt.svg"
-                  text="LOGIN"
-                  color="#FFFFFF"
-                  backgroundColor="#1E3E7B"
-              />
-            </Link>
-          </div>
+          <Link to='/about'>
+            <Button
+              icon="icon-info-circle.svg"
+              text="SOBRE"
+              color="#0B1741"
+              backgroundColor="#72EFDB"
+            />
+          </Link>
+          <Link to='/login'>
+            <Button
+              icon="icon-user-alt.svg"
+              text="LOGIN"
+              color="#FFFFFF"
+              backgroundColor="#1E3E7B"
+            />
+          </Link>
         </Header>
-        <InfoHero/>
+        <InfoHero />
       </C.Container>
       <C.PostContainer showImage={showImage} showTweet={showTweet}>
         <h3>Exibindo os 10 resultados mais recentes para #natureza</h3>
@@ -155,7 +153,7 @@ const PostList = () => {
               </C.PostImg>
             ))}
           </C.PostGrid>
-          
+
           <C.PostCardContainer showTweet={showTweet}>
             {info.map((item, index) => (
               <C.PostCard key={index}>
