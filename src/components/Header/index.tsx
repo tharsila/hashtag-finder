@@ -2,7 +2,7 @@ import * as C from "./styles";
 import { Link } from 'react-router-dom'
 import React from 'react'
 
-export const Header = ({ children }: { children: JSX.Element[] }) => {
+export const Header = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
     return (
         <C.Container>
             <C.Header>

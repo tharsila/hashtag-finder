@@ -9,11 +9,15 @@ export const Container = styled.div`
 
 export const TableArea = styled.div`
     margin: 0 auto;
+    padding-top: 150px;
     max-width: 1300px;
     width: 95%;
-    height: 300px;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 1000px) {
+        padding-top: 125px;
+    }
 `;
 
 export const Title = styled.span(({ fontSize }: { fontSize: number }) => (`

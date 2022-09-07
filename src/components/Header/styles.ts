@@ -25,7 +25,7 @@ export const Container = styled.header`
 export const Header = styled.div`
     margin: 0 auto;
     max-width: 1300px;
-    width: 90%;
+    width: 95%;
     height: 100%;
     display: flex;
     justify-content: space-between;

@@ -23,7 +23,7 @@ export const AboutArea = styled.div`
     margin: auto;
     padding-top: 200px;
     max-width: 1300px;
-    width: 90%;
+    width: 95%;
     display: flex;
     flex-direction: column;
 
@@ -31,6 +31,10 @@ export const AboutArea = styled.div`
         margin-top: 50px;
         max-width: 600px;
         width: 45%;
+    }
+
+    @media (max-width: 1000px) {
+        padding-top: 135px;
     }
 `;
 
