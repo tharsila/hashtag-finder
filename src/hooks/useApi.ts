@@ -1,3 +1,5 @@
+
+import { searchedHashtags } from "../pages/SearchedHashtags";
 import { IUser } from "../types/User";
 
 const Airtable = require('airtable');
@@ -8,6 +10,22 @@ const base = new Airtable({
 const squad = "06-22"
 
 export const useApi = () => ({
+    getSearchedHashtags: async () => {
+        let response = await base("Buscas")
+        .select({ filterByFormula: `Squad = "${squad}"` })
+        .all();
+
+        let hashtags: searchedHashtags[] = [];
+        for(let i in response) {
+            let currentHashtag = {
+                data: response[i].fields.Data,
+                hashtag: response[i].fields.Hashtag,
+            }
+            hashtags.push(currentHashtag);
+        }
+
+        return hashtags;
+    },
     getProjectInfo: async () => {
         let response = await base("Projeto")
         .select({ filterByFormula: `Squad = "${squad}"` })
@@ -15,7 +33,6 @@ export const useApi = () => ({
 
         return response && response[0].fields.Sobre;
     },
-
     getTeamUsers: async () => {
         let response = await base("Equipe")
         .select({

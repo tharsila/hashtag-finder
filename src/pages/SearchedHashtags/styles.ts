@@ -108,7 +108,7 @@ export const Row = styled.div`
     display: flex;
     text-align: flex-start;
     font-size: 24px;
-    border-bottom: 1px solid #5538EE29;
+    border-bottom: 1px solid #153376;
     padding: 0 calc(63px - 22px);
     margin-bottom: 32px;
 

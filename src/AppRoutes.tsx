@@ -10,12 +10,14 @@ import Login from "./pages/login/login";
 import PostList from "./components/PostList";
 import { About } from "./pages/about";
 import { Footer } from "./components/Footer/styles";
+import { SearchedHashtags } from "./pages/SearchedHashtags";
 
 const AppRoutes = () => {
-    return(
+    return (
         <Router>
             <Routes>
                 <Route path="/Login" element={<Login />} />
+                <Route path="/Hashtags" element={<SearchedHashtags />} />
                 <Route path="/" element={<PostList />} />
                 <Route path="/About" element={<About />} />
                 <Route path="/Footer" element={<Footer />} />
