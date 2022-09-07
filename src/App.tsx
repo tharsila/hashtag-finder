@@ -1,7 +1,13 @@
-import TableSearch from './components/TableSearch';
+import { GlobalStyle } from "./App.styles";
+import { SearchedHashtags } from "./pages/SearchedHashtags";
 
 function App() {
-  return <TableSearch />;
+  return (
+    <>
+      <GlobalStyle />
+      <SearchedHashtags />
+    </>
+  );
 }
 
 export default App;
