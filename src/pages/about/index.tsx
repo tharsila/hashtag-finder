@@ -1,3 +1,4 @@
+import React from 'react';
 import * as C from './styles';
 import aboutIlustration from '../../images/about-ilustration.svg';
 import githubIcon from '../../images/icon-github.svg';

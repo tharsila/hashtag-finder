@@ -8,12 +8,17 @@ export const Container = styled.header`
     box-shadow: 0px 3px 29px #5538EE1F;
     backdrop-filter: blur(30px);
     position: fixed;
+    z-index: 1000;
 
     @media (max-width: 500px) {
         height: 82px;
     }
     @media (min-width: 501px) and (max-width: 1000px) {
         height: 90px;
+    }
+
+    a {
+        text-decoration: none;
     }
 `;
 
