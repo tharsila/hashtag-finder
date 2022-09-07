@@ -7,13 +7,13 @@ import { About } from "./pages/about";
 
 import AppRoutes from "./AppRoutes"
 
-function App(){
+function App() {
   return (
     <>
       <GlobalStyle />
-     <AppRoutes />
+      <AppRoutes />
     </>
   );
-}; 
+};
 
 export default App;
