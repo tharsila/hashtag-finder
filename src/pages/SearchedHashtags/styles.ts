@@ -5,6 +5,13 @@ export const Container = styled.div`
     min-height: 100vh;
     background: rgb(13,39,112);
     background: linear-gradient(180deg, rgba(13,39,112,1) 0%, rgba(9,9,121,1) 50%, rgba(9,38,93,1) 100%);
+
+    .loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 `;
 
 export const TableArea = styled.div`

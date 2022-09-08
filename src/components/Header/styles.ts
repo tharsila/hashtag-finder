@@ -35,6 +35,7 @@ export const Header = styled.div`
 export const Logo = styled.div`
     font-size: 35px;
     color: #FFF;
+    cursor: pointer;
 
     #strong {
         font-weight: bold;

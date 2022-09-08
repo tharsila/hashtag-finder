@@ -2,7 +2,6 @@ import React from "react";
 import { GlobalStyle } from "./App.styles";
 import Login from "./pages/login/login"
 import PostList from './components/PostList';
-import Footer from './components/Footer';
 import { About } from "./pages/about";
 
 import AppRoutes from "./AppRoutes"

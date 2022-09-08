@@ -3,8 +3,16 @@ import styled from "styled-components";
 export const Container = styled.div`
     width: 100%;
     height: 100%;
+    min-height: 100vh;
     background: rgb(2,0,36);
     background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(10,23,68,1) 35%, rgba(11,42,139,1) 100%);
+
+    .loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 
     @media(max-width: 1200px) {
         #aboutTitle {

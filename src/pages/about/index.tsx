@@ -9,6 +9,9 @@ import { Button } from '../../components/Button';
 import { useApi } from '../../hooks/useApi';
 import { useEffect, useState } from 'react';
 import { IUser } from '../../types/User';
+import { Circles } from 'react-loader-spinner';
+import { Footer } from '../../components/Footer';
+import { Link } from 'react-router-dom';
 
 type ProjectData = {
     projectInfo: string;
@@ -18,6 +21,7 @@ type ProjectData = {
 export const About = () => {
     const api = useApi();
     const [projectData, setProjectData] = useState<ProjectData>();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         (async () => {
@@ -27,6 +31,8 @@ export const About = () => {
             let currentData = teamUsers && { projectInfo, teamUsers };
 
             setProjectData(currentData);
+
+            setIsLoading(false);
         })();
     }, []);
 
@@ -39,91 +45,106 @@ export const About = () => {
                     color="#0B1741"
                     backgroundColor="#72EFDB"
                 />
-                <Button
-                    icon="icon-user-alt.svg"
-                    text="LOGIN"
-                    color="#FFFFFF"
-                    backgroundColor="#1E3E7B"
-                />
-            </Header>
-            <C.AboutArea>
-                <C.AboutProject>
-                    <div>
-                        <C.Title
-                            id="aboutTitle"
-                            fontSize={65}
-                            fontColor={'#FFF'}
-                        >
-                            Sobre o projeto
-                        </C.Title>
-                        <C.Text
-                            id="aboutText"
-                            fontSize={18}
-                            lineHeight={1.8}
-                            marginTop={40}
-                        >
-                            {projectData?.projectInfo}
-                        </C.Text>
-                    </div>
-                    <img
-                        id="aboutIlustration"
-                        src={aboutIlustration}
-                        alt="About ilustration"
+                <Link to="/login">
+                    <Button
+                        icon="icon-user-alt.svg"
+                        text="LOGIN"
+                        color="#FFFFFF"
+                        backgroundColor="#1E3E7B"
                     />
-                </C.AboutProject>
-                <C.WhoWeAre>
-                    <C.Title
-                        id="whoWeAreTitle"
-                        fontSize={54}
-                        fontColor={'#FFF'}
-                    >
-                        Quem somos
-                    </C.Title>
-                    <C.Cards>
-                        {projectData?.teamUsers.map((person, index) => (
-                            <C.Card key={index}>
-                                <C.Avatar
-                                    src={person.img}
-                                    alt="Avatar"
-                                />
+                </Link>
+            </Header>
+            {isLoading ?
+                (<Circles
+                    height="200"
+                    width="200"
+                    color="#72efdb"
+                    ariaLabel="circles-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="loader"
+                    visible={true}
+                />) :
+                (<>
+                    <C.AboutArea>
+                        <C.AboutProject>
+                            <div>
                                 <C.Title
-                                    fontSize={25}
-                                    fontColor={'#72EFDB'}
+                                    id="aboutTitle"
+                                    fontSize={65}
+                                    fontColor={'#FFF'}
                                 >
-                                    {person.name}
+                                    Sobre o projeto
                                 </C.Title>
                                 <C.Text
-                                    fontSize={16}
-                                    lineHeight={1.5}
-                                    marginTop={20}
+                                    id="aboutText"
+                                    fontSize={18}
+                                    lineHeight={1.8}
+                                    marginTop={40}
                                 >
-                                    {person.description}
+                                    {projectData?.projectInfo}
                                 </C.Text>
-                                <C.Icons>
-                                    <a href={person.github}>
-                                        <img
-                                            src={githubIcon}
-                                            alt="GitHub icon"
+                            </div>
+                            <img
+                                id="aboutIlustration"
+                                src={aboutIlustration}
+                                alt="About ilustration"
+                            />
+                        </C.AboutProject>
+                        <C.WhoWeAre>
+                            <C.Title
+                                id="whoWeAreTitle"
+                                fontSize={54}
+                                fontColor={'#FFF'}
+                            >
+                                Quem somos
+                            </C.Title>
+                            <C.Cards>
+                                {projectData?.teamUsers.map((person, index) => (
+                                    <C.Card key={index}>
+                                        <C.Avatar
+                                            src={person.img}
+                                            alt="Avatar"
                                         />
-                                    </a>
-                                    <a href={`mailto:${person.email}`}>
-                                        <img
-                                            src={emailIcon}
-                                            alt="Email icon"
-                                        />
-                                    </a>
-                                    <a href={person.linkedin}>
-                                        <img
-                                            src={linkedinIcon}
-                                            alt="LinkedIn icon"
-                                        />
-                                    </a>
-                                </C.Icons>
-                            </C.Card>
-                        ))}
-                    </C.Cards>
-                </C.WhoWeAre>
-            </C.AboutArea>
+                                        <C.Title
+                                            fontSize={25}
+                                            fontColor={'#72EFDB'}
+                                        >
+                                            {person.name}
+                                        </C.Title>
+                                        <C.Text
+                                            fontSize={16}
+                                            lineHeight={1.5}
+                                            marginTop={20}
+                                        >
+                                            {person.description}
+                                        </C.Text>
+                                        <C.Icons>
+                                            <a href={person.github}>
+                                                <img
+                                                    src={githubIcon}
+                                                    alt="GitHub icon"
+                                                />
+                                            </a>
+                                            <a href={`mailto:${person.email}`}>
+                                                <img
+                                                    src={emailIcon}
+                                                    alt="Email icon"
+                                                />
+                                            </a>
+                                            <a href={person.linkedin}>
+                                                <img
+                                                    src={linkedinIcon}
+                                                    alt="LinkedIn icon"
+                                                />
+                                            </a>
+                                        </C.Icons>
+                                    </C.Card>
+                                ))}
+                            </C.Cards>
+                        </C.WhoWeAre>
+                    </C.AboutArea>
+                    <Footer />
+                </>)}
         </C.Container>
     );
 };

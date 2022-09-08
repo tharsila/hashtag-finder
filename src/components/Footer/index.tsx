@@ -1,12 +1,9 @@
-import React from 'react'
 import * as C from './styles'
 
-const index = () => {
+export const Footer = () => {
   return (
-    <C.Footer>
+    <C.Container>
       <h4>@Newtab Academy 2022. Todos os direitos reservados</h4>
-    </C.Footer>
+    </C.Container>
   )
 }
-
-export default index
