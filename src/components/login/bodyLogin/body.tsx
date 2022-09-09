@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 
 
+
 const LoginUser = () => {
 
     // variables that store user data
@@ -56,18 +57,6 @@ const LoginUser = () => {
     
 
     return (
-    <>
-        <Header>
-            <Link to="/">
-                <Button
-                icon="icon-home.svg"
-                text="Home"
-                color="#0B1741"
-                backgroundColor="#72EFDB"
-                />
-            </Link>
-        </Header>
-
         <Form onSubmit={handleSubmit}>
             <H3>Login</H3>
             <Input type="email"
@@ -84,13 +73,12 @@ const LoginUser = () => {
                 onChange = {(e) => setPassword(e.target.value)}
             />
             <Button 
-            
+            icon="nada.svg"
             text="ACESSAR"
             color="#0B1741"
             backgroundColor="#72EFDB"
             />
         </Form>
-    </>
     );
 
 

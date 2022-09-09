@@ -5,7 +5,7 @@ import Mobile from "../../../images/mobileHeroBg.jpg"
 export const Form = styled.form`
 width: 378px;
 height: 425px;
-margin-top: 90px;
+margin-top: 25vh;
 margin-left: 36vw;
 margin-right: auto;
 display: flex;
@@ -16,7 +16,7 @@ border-radius: 14px;
 backdrop-filter: blur(30px);
 margin-bottom: 100px;
     @media (max-width: 767px){
-        margin-top: 60px;
+        margin-top: 25vh;
         width: 85%;
         position: relative;
         height: 400px;
@@ -65,6 +65,7 @@ background: rgba(255, 255, 255, 0);
 export const BodyLogin = styled.div`
 background-image: url(${background});
 height: 100vh;
+display:flex;
 background-size: cover;
     @media(max-width: 428px){
         background-image: url(${Mobile});
