@@ -26,7 +26,7 @@ export const SearchedHashtags = () => {
 
             setIsLoading(false);
         })();
-    }, []);
+    }, [api]);
 
     return (
         <C.Container>

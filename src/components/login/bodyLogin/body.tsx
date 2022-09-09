@@ -3,7 +3,7 @@ import { ButtonForm } from "./styles";
 import { Form, H3, Input } from "./styles";
 import validator from 'validator';
 import { AuthContext } from "../../../contexts/Auth/AuthContext";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 
 
@@ -44,7 +44,7 @@ const LoginUser = () => {
         if (email && password) {
             const isLogged = await auth.signIn(email, password);
             if ( isLogged ) {
-                navigate('/');
+                navigate('/Hashtags');
                 console.log(isLogged)
             } else {
                 alert("Unable to login, please check your credentials")
