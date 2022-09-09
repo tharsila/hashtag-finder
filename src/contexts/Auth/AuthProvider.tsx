@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element}) => {
 
     useEffect(()=>{
         validateToken();
-    });
+    }, []);
     
     
     const validateToken = () => {
