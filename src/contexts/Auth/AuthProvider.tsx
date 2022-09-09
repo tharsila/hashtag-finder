@@ -13,14 +13,14 @@ export const AuthProvider = ({ children }: { children: JSX.Element}) => {
 
     useEffect(()=>{
         validateToken();
-    }, []);
+    });
     
     
     const validateToken = () => {
         const storageData = localStorage.getItem('token');
         if (storageData) {
             if (storageData === token){
-                Navigate("/")
+                Navigate("/Hashtags")
             }
 
         }

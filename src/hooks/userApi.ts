@@ -1,4 +1,4 @@
-import { User } from "../types/User"
+import  User  from "../types/User"
 
 const Airtable = require('airtable');
 const base = new Airtable({
