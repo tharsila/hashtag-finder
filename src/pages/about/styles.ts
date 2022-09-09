@@ -3,8 +3,16 @@ import styled from "styled-components";
 export const Container = styled.div`
     width: 100%;
     height: 100%;
+    min-height: 100vh;
     background: rgb(2,0,36);
     background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(10,23,68,1) 35%, rgba(11,42,139,1) 100%);
+
+    .loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 
     @media(max-width: 1200px) {
         #aboutTitle {
@@ -23,7 +31,7 @@ export const AboutArea = styled.div`
     margin: auto;
     padding-top: 200px;
     max-width: 1300px;
-    width: 90%;
+    width: 95%;
     display: flex;
     flex-direction: column;
 
@@ -32,10 +40,15 @@ export const AboutArea = styled.div`
         max-width: 600px;
         width: 45%;
     }
+
+    @media (max-width: 1000px) {
+        padding-top: 135px;
+    }
 `;
 
 export const AboutProject = styled.div`
     display: flex;
+    justify-content: space-between;
     gap: 80px;
 
     @media(max-width: 1100px) {

@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import background from '../../images/hero-bg.jpg';
+import mobile from '../../images/mobileHeroBg.jpg'
 
 type PropsImage = {
   showImage:boolean;
@@ -12,6 +14,16 @@ type PropsContainer = {
   showImage:boolean;
   showTweet:boolean;
 }
+
+export const Container = styled.div `
+  background-image: url(${background});
+  height: 100vh;
+  background-size: cover;
+
+    @media(max-width: 500px){
+      background-image: url(${mobile});
+    }
+`
 
 export const PostContainer = styled.section(({showImage, showTweet}:PropsContainer) => (
   `
@@ -67,8 +79,9 @@ export const PostContent = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 30px;
-  padding: 0px 140px;
-  margin-top: 100px;
+  padding: 0px 70px;
+  /* margin-top: 100px; */
+  margin: 100px auto 0;
   max-width: 1300px;
   @media(max-width: 1150px) {
     justify-content: center;

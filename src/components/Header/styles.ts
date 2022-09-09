@@ -8,6 +8,7 @@ export const Container = styled.header`
     box-shadow: 0px 3px 29px #5538EE1F;
     backdrop-filter: blur(30px);
     position: fixed;
+    z-index: 1000;
 
     @media (max-width: 500px) {
         height: 82px;
@@ -15,12 +16,16 @@ export const Container = styled.header`
     @media (min-width: 501px) and (max-width: 1000px) {
         height: 90px;
     }
+
+    a {
+        text-decoration: none;
+    }
 `;
 
 export const Header = styled.div`
     margin: 0 auto;
     max-width: 1300px;
-    width: 90%;
+    width: 95%;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -30,6 +35,7 @@ export const Header = styled.div`
 export const Logo = styled.div`
     font-size: 35px;
     color: #FFF;
+    cursor: pointer;
 
     #strong {
         font-weight: bold;

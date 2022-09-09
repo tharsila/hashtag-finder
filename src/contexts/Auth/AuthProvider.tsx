@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { User } from "../../types/User"
+import  User  from "../../types/User"
 import { AuthContext } from "./AuthContext"
 import { Api } from "../../hooks/userApi"
 import { useNavigate } from "react-router-dom"
