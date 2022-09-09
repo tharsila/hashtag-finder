@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ButtonForm } from "./styles";
 import { Form, H3, Input } from "./styles";
 import validator from 'validator';
-import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contexts/Auth/AuthContext";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 
@@ -11,8 +12,8 @@ const LoginUser = () => {
     // variables that store user data
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const nav = useNavigate();
-    const API_KEY = process.env.REACT_APP_API_KEY;
+    const auth = useContext( AuthContext );
+    const navigate = useNavigate();
 
 
         //function that validates email 
@@ -37,40 +38,29 @@ const LoginUser = () => {
             }
         };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();      
-        console.log("Submit",email);
 
-        
-        //Checking if the user is authorized in the api
-
-        const url = "https://api.airtable.com/v0/app6wQWfM6eJngkD4/Login?filterByFormula=AND" + `({Squad}= '06-22',{Email}='${email}',{Senha}= '${password}')`;
-                fetch(encodeURI(url), {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${API_KEY}`,
-                    },
-                })
-                    .then((response) => response.json())
-                    .then(function (response) {
-                        if (response.records[0] !== undefined) {
-                            nav("/")
-                        }
-                            // if you have an invalid field display an error message and clear the form
-
-                            return (alert("User or Password invalid ! Please check your data"), setEmail(""), setPassword(""))
-                    })
+        if (email && password) {
+            const isLogged = await auth.signIn(email, password);
+            if ( isLogged ) {
+                navigate('/');
+                console.log(isLogged)
+            } else {
+                alert("Unable to login, please check your credentials")
+            }
+        }
     };
 
 
             //Functions to clear form input
-                const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-                    setEmail(e.target.value);
-                }
+                // const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+                //     setEmail(e.target.value);
+                // }
 
-                const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-                    setPassword(e.target.value);
-                }
+                // const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+                //     setPassword(e.target.value);
+                // }
     
 
     return (
@@ -81,13 +71,13 @@ const LoginUser = () => {
                 name="e-mail"
                 onBlur = {(e) => { handleEmailChange(e) }}
                 value = {email}
-                onChange = {(e) => { handleChangeEmail(e) }}
+                onChange = {(e) => setEmail(e.target.value) }
             />
             <Input type="password"
                 name="Password"
                 placeholder="Senha"
                 onBlur = {(e) => { handlePasswordChange(e) }}
-                onChange = {(e) => {handleChangePassword(e) }}
+                onChange = {(e) => setPassword(e.target.value)}
             />
             <ButtonForm type="submit">
                 Acessar

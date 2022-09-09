@@ -10,27 +10,22 @@ import Login from "./pages/login/login";
 import PostList from "./components/PostList";
 import { About } from "./pages/about";
 import { Footer } from "./components/Footer/styles";
+import { AuthProvider } from "./contexts/Auth/AuthProvider";
 
-import  {AuthProviders}  from "./contexts/auth";
-import { LoginCheck } from "./contexts/LoginCheck";
 
 const AppRoutes = () => {
 
     return(
-    <AuthProviders>
+    <AuthProvider>
         <BrowserRouter >
             <Routes>
-                <Route path="/Login" element={
-                    <LoginCheck>
-                        <Login /> 
-                    </LoginCheck>
-                } />
+                <Route path="/Login" element={  <Login /> } />
                 <Route path="/" element={<PostList />} />
                 <Route path="/About" element={<About />} />
                 <Route path="/Footer" element={<Footer />} />
             </Routes>
         </BrowserRouter>
-    </AuthProviders>
+    </AuthProvider>
     )
 }
 
