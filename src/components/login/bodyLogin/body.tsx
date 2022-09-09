@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
-import { ButtonForm } from "./styles";
 import { Form, H3, Input } from "./styles";
 import validator from 'validator';
 import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import {  useNavigate } from "react-router-dom";
+import { Header } from "../../../components/Header/index"
+import { Button } from "../../../components/Button/index";
+import { Link } from "react-router-dom";
 
 
 
@@ -51,19 +53,21 @@ const LoginUser = () => {
             }
         }
     };
-
-
-            //Functions to clear form input
-                // const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-                //     setEmail(e.target.value);
-                // }
-
-                // const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-                //     setPassword(e.target.value);
-                // }
     
 
     return (
+    <>
+        <Header>
+            <Link to="/">
+                <Button
+                icon="icon-home.svg"
+                text="Home"
+                color="#0B1741"
+                backgroundColor="#72EFDB"
+                />
+            </Link>
+        </Header>
+
         <Form onSubmit={handleSubmit}>
             <H3>Login</H3>
             <Input type="email"
@@ -79,10 +83,14 @@ const LoginUser = () => {
                 onBlur = {(e) => { handlePasswordChange(e) }}
                 onChange = {(e) => setPassword(e.target.value)}
             />
-            <ButtonForm type="submit">
-                Acessar
-            </ButtonForm>
+            <Button 
+            
+            text="ACESSAR"
+            color="#0B1741"
+            backgroundColor="#72EFDB"
+            />
         </Form>
+    </>
     );
 
 

@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Circles } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
+import { AuthContext } from "../../contexts/Auth/AuthContext";
 import { useApi } from "../../hooks/useApi";
 import { useDate } from "../../hooks/useDate";
 import * as C from "./styles";
@@ -17,6 +18,7 @@ export const SearchedHashtags = () => {
     const [searchedHashtags, setSearchedHashtags] = useState<searchedHashtags[]>();
     const api = useApi();
     const date = useDate();
+    const Logout = useContext( AuthContext )
 
     useEffect(() => {
         (async () => {
@@ -28,11 +30,18 @@ export const SearchedHashtags = () => {
         })();
     }, [api]);
 
+    const handleClick = async () => { 
+         await Logout.signOut();
+         window.location.reload();
+        
+    }
+
     return (
         <C.Container>
             <Header>
                 <Link to="/">
                     <Button
+                        onClick={handleClick}
                         icon="icon-home.svg"
                         text="HOME"
                         color="#0B1741"

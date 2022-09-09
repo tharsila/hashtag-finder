@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { Button } from "../headerLogin/styles"
 import background from "../../../images/hero-bg.jpg"
 import Mobile from "../../../images/mobileHeroBg.jpg" 
 
@@ -62,18 +61,6 @@ background: rgba(255, 255, 255, 0);
 }
 `
 
-export const ButtonForm = styled(Button)`
-align-items: center;
-width: 120px;
-margin-left: auto;
-margin-right: auto;
-@media(max-width: 428px){
-    width: 213px;
-    height: 58px;
-    font-size: 18px;
-    text-transform: uppercase;
-    margin-top: 32px;
-}`
 
 export const BodyLogin = styled.div`
 background-image: url(${background});

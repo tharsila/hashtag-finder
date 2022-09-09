@@ -2,10 +2,11 @@ import React from "react";
 import * as C from "./styles";
 
 type Props = {
-  icon: string;
+  icon?: string;
   text: string;
   color: string;
   backgroundColor: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export const Button = ({ icon, text, color, backgroundColor }: Props) => {
