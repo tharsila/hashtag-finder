@@ -6,3 +6,9 @@ export interface IUser {
     linkedin: string;
     img: string;
 }
+
+type User = {
+    Email: string;
+    Senha: string;
+}
+export default User;

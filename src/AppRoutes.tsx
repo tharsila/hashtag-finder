@@ -3,8 +3,8 @@ import {
     BrowserRouter as Router,
     Route,
     Routes,
-    Navigate
 } from "react-router-dom";
+import { AuthProvider } from "./contexts/Auth/AuthProvider";
 
 import Login from "./pages/login/login";
 import PostList from "./components/PostList";
@@ -13,6 +13,7 @@ import { SearchedHashtags } from "./pages/SearchedHashtags";
 
 const AppRoutes = () => {
     return (
+        <AuthProvider>
         <Router>
             <Routes>
                 <Route path="/Login" element={<Login />} />
@@ -21,6 +22,7 @@ const AppRoutes = () => {
                 <Route path="/About" element={<About />} />
             </Routes>
         </Router>
+    </AuthProvider>
     )
 }
 
