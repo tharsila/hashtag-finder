@@ -42,8 +42,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element}) => {
     const signOut = () => {
         setUser(null)
         setTokenN("")
-        localStorage.clear()
-        window.location.reload()
+        localStorage.removeItem("token")
     }
 
     const setToken = () => {
