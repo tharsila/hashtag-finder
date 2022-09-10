@@ -12,6 +12,7 @@ import { About } from "./pages/about";
 import { SearchedHashtags } from "./pages/SearchedHashtags";
 import { RequireAuth } from "./contexts/Auth/RequireAuth";
 import { AuthProvider } from "./contexts/Auth/AuthProvider"
+import { LoginCheck } from "./contexts/Auth/LoginCheck";
 
 
 const AppRoutes = () => {
@@ -19,7 +20,11 @@ const AppRoutes = () => {
         <Router>
             <AuthProvider>
                 <Routes>
-                    <Route path="/Login" element={<Login />} />
+                    <Route path="/Login" element={
+                        <LoginCheck>
+                            <Login />
+                        </LoginCheck>
+                    } />
                     <Route path="/Hashtags" element={
                         <RequireAuth>
                             <SearchedHashtags/>

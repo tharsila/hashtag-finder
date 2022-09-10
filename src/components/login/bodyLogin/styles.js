@@ -1,12 +1,11 @@
 import styled from "styled-components"
-import { Button } from "../headerLogin/styles"
 import background from "../../../images/hero-bg.jpg"
 import Mobile from "../../../images/mobileHeroBg.jpg" 
 
 export const Form = styled.form`
 width: 378px;
 height: 425px;
-margin-top: 90px;
+margin-top: 25vh;
 margin-left: 36vw;
 margin-right: auto;
 display: flex;
@@ -17,7 +16,7 @@ border-radius: 14px;
 backdrop-filter: blur(30px);
 margin-bottom: 100px;
     @media (max-width: 767px){
-        margin-top: 60px;
+        margin-top: 25vh;
         width: 85%;
         position: relative;
         height: 400px;
@@ -62,7 +61,42 @@ background: rgba(255, 255, 255, 0);
 }
 `
 
-export const ButtonForm = styled(Button)`
+
+export const BodyLogin = styled.div`
+background-image: url(${background});
+height: 100vh;
+display:flex;
+background-size: cover;
+    @media(max-width: 428px){
+        background-image: url(${Mobile});
+        background-size: cover;
+    }`
+
+    export const Button = styled.button`
+    width: 139px;
+    height: 37px;
+    background-color: #72EFDB;
+    border-radius: 25px;
+    text-align: center;
+    border: none;
+    margin-right: 61px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 42px;
+    letter-spacing: 1px;
+    font: normal normal bold 15px/13px Rubik;
+    opacity: 1;
+    padding-inline: 23px;
+    @media(max-width: 425px){
+        width: 102px;
+        height: 30px;
+        margin-right: 16px;
+        font-size: 11px;
+        padding-inline: 12px;
+    }`
+
+    export const ButtonForm = styled(Button)`
 align-items: center;
 width: 120px;
 margin-left: auto;
@@ -74,13 +108,3 @@ margin-right: auto;
     text-transform: uppercase;
     margin-top: 32px;
 }`
-
-export const BodyLogin = styled.div`
-background-image: url(${background});
-height: 100vh;
-background-size: cover;
-    @media(max-width: 428px){
-        background-image: url(${Mobile});
-        background-size: cover;
-    }
-`
