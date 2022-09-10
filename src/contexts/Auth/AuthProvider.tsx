@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: { children: JSX.Element}) => {
             if(data.Email === Email && data.Senha === Senha) {
                  setUser(data)
                  setToken()
-                 localStorage.clear()
+                 
                  return true
             }
        }
@@ -40,8 +40,10 @@ export const AuthProvider = ({ children }: { children: JSX.Element}) => {
     }
 
     const signOut = () => {
-        setUser(null);
-        setTokenN("");
+        setUser(null)
+        setTokenN("")
+        localStorage.clear()
+        window.location.reload()
     }
 
     const setToken = () => {

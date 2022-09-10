@@ -30,10 +30,9 @@ export const SearchedHashtags = () => {
         })();
     }, [api]);
 
-    const handleClick = async () => { 
-         await Logout.signOut();
-         window.location.reload();
-        
+    const handleClick =  (e: React.MouseEvent<HTMLButtonElement>) => { 
+        e.preventDefault();
+       Logout.signOut();
     }
 
     return (
@@ -41,7 +40,6 @@ export const SearchedHashtags = () => {
             <Header>
                 <Link to="/">
                     <Button
-                        onClick={handleClick}
                         icon="icon-home.svg"
                         text="HOME"
                         color="#0B1741"
@@ -49,6 +47,7 @@ export const SearchedHashtags = () => {
                     />
                 </Link>
                 <Button
+                    handleClick = { handleClick }
                     icon="icon-power-off.svg"
                     text="SAIR"
                     color="#FFF"

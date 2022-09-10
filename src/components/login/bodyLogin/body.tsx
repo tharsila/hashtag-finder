@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Form, H3, Input } from "./styles";
+import { ButtonForm, Form, H3, Input } from "./styles";
 import validator from 'validator';
 import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import {  useNavigate } from "react-router-dom";
@@ -72,12 +72,7 @@ const LoginUser = () => {
                 onBlur = {(e) => { handlePasswordChange(e) }}
                 onChange = {(e) => setPassword(e.target.value)}
             />
-            <Button 
-            icon="nada.svg"
-            text="ACESSAR"
-            color="#0B1741"
-            backgroundColor="#72EFDB"
-            />
+            <ButtonForm type="submit">ACESSAR</ButtonForm>
         </Form>
     );
 

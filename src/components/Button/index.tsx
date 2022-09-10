@@ -6,14 +6,15 @@ type Props = {
   text: string;
   color: string;
   backgroundColor: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  handleClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
-export const Button = ({ icon, text, color, backgroundColor }: Props) => {
+export const Button = ({ icon, text, color, backgroundColor, handleClick }: Props) => {
   return (
     <C.ButtonContainer
       color={color}
       backgroundColor={backgroundColor}
+      onClick = { handleClick }
     >
       <C.Icon src={require(`../../images/${icon}`)} />
       <span>{text}</span>

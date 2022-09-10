@@ -70,5 +70,41 @@ background-size: cover;
     @media(max-width: 428px){
         background-image: url(${Mobile});
         background-size: cover;
-    }
-`
+    }`
+
+    export const Button = styled.button`
+    width: 139px;
+    height: 37px;
+    background-color: #72EFDB;
+    border-radius: 25px;
+    text-align: center;
+    border: none;
+    margin-right: 61px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 42px;
+    letter-spacing: 1px;
+    font: normal normal bold 15px/13px Rubik;
+    opacity: 1;
+    padding-inline: 23px;
+    @media(max-width: 425px){
+        width: 102px;
+        height: 30px;
+        margin-right: 16px;
+        font-size: 11px;
+        padding-inline: 12px;
+    }`
+
+    export const ButtonForm = styled(Button)`
+align-items: center;
+width: 120px;
+margin-left: auto;
+margin-right: auto;
+@media(max-width: 428px){
+    width: 213px;
+    height: 58px;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-top: 32px;
+}`
