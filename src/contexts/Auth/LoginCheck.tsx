@@ -4,9 +4,9 @@ import { SearchedHashtags } from "../../pages/SearchedHashtags/index"
 
 
 export const LoginCheck = ({ children }: { children: JSX.Element }) => {
-    const loginCheck = useContext( AuthContext )
+    const CheckUser = useContext( AuthContext )
     
-    if ( !loginCheck.user) {
+    if ( CheckUser.user) {
         return <SearchedHashtags />;
     }
     return children;
