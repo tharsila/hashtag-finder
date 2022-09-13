@@ -2,12 +2,14 @@ import { Header } from "../../../components/Header/index"
 import { Button } from "../../../components/Button/index";
 import { Link } from "react-router-dom";
 
-export const Headers = () => {
 
+export const Headers = () => {
+    
 return(
-    <div>
+    
+   <div> 
         <Header>
-            <Link to="/">
+             <Link to="/"> 
                 <Button
                 icon="icon-home.svg"
                 text="Home"
@@ -16,6 +18,5 @@ return(
                 />
             </Link>
         </Header>
-    </div>
-)
+    </div>)
 };
