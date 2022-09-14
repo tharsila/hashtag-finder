@@ -1,14 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactElement  } from 'react';
 import * as C from './styles';
+/* interface Ts */
 import { IInfoTwitter } from '../../types/InfoTwitter'
+
+/* components */
 import { Header } from '../../components/Header';
 import { Button } from '../../components/Button';
-import { Link } from 'react-router-dom';
+import { Footer } from '../../components/Footer';
+import Card from '../../components/Card';
+import Charge from '../../components/Charge';
+
+/* twitter api */
 import { getTweets } from '../../api/GetTweets';
 import { getTweetImages } from '../../api/GetTweetsImages';
-import { useApi } from "../../hooks/useApi";
-import Card from '../../components/Card';
 
+/* airtable api */
+import { useApi } from "../../hooks/useApi";
+
+/* frame-motion */
+import { motion } from "framer-motion"
+
+/* router */
+import { Link } from 'react-router-dom';
 
 export type searchedHashtags = {
   data: number;
@@ -25,24 +38,37 @@ export type InfoTweet = {
 }
 
 const Home = () => {
+
+  /* states for mobile version */
   const [showTweet, setShowTweet] = useState<boolean>(false);
   const [showImage, setShowImage] = useState<boolean>(false);
 
+  /* state for search */
   const [searchValue, setSearchValue] = useState<string>('')
-  const [searchResponse, setSearchResponse] = useState<string>('')
 
+  /* validator response input*/
+  const [searchResponse, setSearchResponse] = useState<string | ReactElement>('')
+
+  /* tweets quantity */
   const [resultsNumber, setResultsNumber] = useState<number>(0);
   const [moreRequest, setMoreRequest] = useState<number>(10);
 
-  const [titleTag, setTitleTag] = useState<string>('');
+  const [hashTag, setHashTag] = useState<string>('');
 
+  /* get tweets and tweets images */
   const [imageActive, setImageActive] = useState({});
   const [tweets, setTweets] = useState<InfoTweet[]>([]);
   const [tweetImages, setTweetImages] = useState<IInfoTwitter[]>([]);
 
-  console.log(tweets);
+  /* states for next 10 tweets */
+  const [loading, setLoading] = useState<boolean>(false);
+  const [scrollTopButton, setTopButton] = useState<boolean>(false);
+  const [showScroll, setShowScroll] = useState<boolean>(false);
+  const [animationMode, setAnimationMode] = useState(0);
+
   const api = useApi();
 
+  /* actions for mobile devices */
   const changeLink = (e: any) => {
     if (e.target.innerText === 'Tweets') {
       setShowTweet(true)
@@ -55,7 +81,7 @@ const Home = () => {
 
   useEffect(() => {
     if (searchValue) {
-      asyncCall();
+      asyncPost();
       return () => {
         if (tweets) {
         }
@@ -65,7 +91,8 @@ const Home = () => {
     }
   });
 
-  const asyncCall = () => {
+  /* req twitter api */
+  const asyncPost = () => {
     getTweets(searchValue, moreRequest)
       .then((tweetCall) => {
         const tweetSet = tweetCall.data.map((tweet:any) => {
@@ -103,17 +130,59 @@ const Home = () => {
           });
 
           setTweetImages(imgSet);
-          setTitleTag(searchValue);
+          setHashTag(searchValue);
           setMoreRequest(moreRequest + 10);
         });
       })
       .catch(() => {
-        setSearchResponse('Nenhum tweet foi achado, tente novamente... 😭');
+        setSearchResponse('Nenhum tweet foi encontrado, tente novamente!');
         setTweets([]);
       });
   };
 
+  useEffect(() => {
+    const win: Window = window
 
+    if (tweets) {
+      win.addEventListener('scroll', handleScroll);
+    }
+
+    win.addEventListener('scroll', checkScrollTop);
+  }, []);
+
+
+  const checkScrollTop: any = () => {
+    if (!showScroll && window.pageYOffset > 400) {
+      setShowScroll(true);
+    } else if (showScroll && window.pageYOffset <= 400) {
+      setShowScroll(false);
+    }
+  };
+
+  const handleScroll = () => {
+    if (tweets) {
+      const bottom =
+        Math.ceil(window.innerHeight + window.scrollY) >=
+        document.documentElement.scrollHeight;
+      if (bottom) {
+        setLoading(true);
+        fetchMoreData()
+        setTimeout(() => setLoading(false), 2000);
+        setTimeout(() => fetchMoreData(), 1500);
+        setTimeout(() => setTopButton(true), 3000);
+      }
+    }
+  };
+
+  /* show next tweets */
+  function fetchMoreData() {
+    const newSearch = (document.getElementById('input') as HTMLInputElement).value;
+    setSearchValue(newSearch);
+
+    setResultsNumber(resultsNumber + 5);
+  }
+ 
+  /* show tweets and validations */
   const handleValue = (e:any) => {
     if (e.keyCode === 13) {
       const asyncPost = async () => {
@@ -124,14 +193,14 @@ const Home = () => {
         e.target.value.replace(/[^a-zA-Z0-9_]/g, '').replace(' ', ''),
       );
   
-      /* setSearchResponse(<Loader />); */
+      setSearchResponse(<Charge />);
       setResultsNumber(10);
       setMoreRequest(10);
-  
+      setShowTweet(true)
       asyncPost();
   
       if (e.target.value === '') {
-        setSearchResponse('É necessário digitar algo no campo de buscas...');
+        setSearchResponse('É necessário digitar algo no campo de buscas!');
         setSearchValue('');
       }
     }
@@ -139,12 +208,13 @@ const Home = () => {
     if (e.keyCode === 8) {
       setSearchResponse('');
       setSearchValue('');
-      setTitleTag('');
+      setHashTag('');
       setResultsNumber(0);
     }
   
     if (e.target.value.length >= 20) {
-      setSearchResponse('Limite de caracteres atingido 🚨.');
+      setSearchResponse('Limite de caracteres atingido!');
+      setSearchValue('');
     }
   };
 
@@ -183,7 +253,7 @@ const Home = () => {
                 alt="" 
                 onClick={() => {
                   let inputValue = (document.getElementById('input') as HTMLInputElement).value;
-                  /* setSearchResponse(<Loader />); */
+                  setSearchResponse(<Charge />);
                   setMoreRequest(10);
                   setSearchValue(
                     inputValue
@@ -203,25 +273,39 @@ const Home = () => {
             <input id='input' type="text" placeholder="Buscar..." onKeyDown={handleValue} />
           </C.Input>
         </C.InputContainer>
+        {searchResponse ? (
+            <>
+              <motion.div
+                initial={{ y: animationMode, opacity: 0 }}
+                animate={{ y: animationMode, opacity: 1 }}
+                onClick={() => setAnimationMode(animationMode)}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                <div className={tweets ? 'bgResponse' : 'bgLoader'}>
+                  <div className='textResponse'>{searchResponse}</div>
+                </div>
+              </motion.div>
+            </>
+          ) : null}
         <C.PostContainer tweets={tweets} showImage={showImage} showTweet={showTweet}>
           <h3>Exibindo os {moreRequest > 0 ? moreRequest - 10 : null}{' '}
-          resultados mais recentes para #{titleTag}</h3>
+          resultados mais recentes para #{hashTag}</h3>
           <div className="choose">
             <span onClick={changeLink}>Tweets</span>
             <span onClick={changeLink}>Imagens</span>
           </div>
-        <C.PostContent>
-          <C.PostGrid showImage={showImage}>
-            {tweetImages?.map(({user, username, img, id}:IInfoTwitter) => (
-              <C.PostImg key={id}>
-                <img src={img} alt={user} />
-                <C.TwitterInfo>
-                  <p>Postado por:</p>
-                  <strong>@{username}</strong>
-                </C.TwitterInfo>
-              </C.PostImg>
-            ))}
-          </C.PostGrid>
+          <C.PostContent>
+            <C.PostGrid showImage={showImage}>
+              {tweetImages?.map(({user, username, img, id}:IInfoTwitter) => (
+                <C.PostImg key={id}>
+                  <img src={img} alt={user} />
+                  <C.TwitterInfo>
+                    <p>Postado por:</p>
+                    <strong>@{username}</strong>
+                  </C.TwitterInfo>
+                </C.PostImg>
+              ))}
+            </C.PostGrid>
             <C.PostCardContainer showTweet={showTweet}>
               {tweets.map(({user, username, text, id, photo }: InfoTweet) => (
                 <Card
@@ -232,12 +316,23 @@ const Home = () => {
                   text={text}
                   photo={photo}
                   id={id}
-                 />
+                  />
               ))}
             </C.PostCardContainer>
-        </C.PostContent>
-      </C.PostContainer>
-
+                {loading ? (
+                <motion.div
+                  initial={{ y: animationMode, opacity: 1 }}
+                  animate={{ y: animationMode, opacity: 0 }}
+                  onClick={() => setAnimationMode(animationMode)}
+                  transition={{ duration: 0.7, delay: 0.4 }}
+                  className='bgLoader'
+                >
+                  <Charge />
+                </motion.div>
+            ) : null}
+          </C.PostContent>
+        </C.PostContainer>
+        <Footer />
       </C.Container>
     </>
   )

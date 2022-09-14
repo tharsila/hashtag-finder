@@ -8,9 +8,35 @@ export const Container = styled.div `
   height: 100vh;
   background-size: cover;
 
-    @media(max-width: 500px){
-      background-image: url(${mobile});
-    }
+  .bgResponse{
+    justify-content: center;
+    display: flex;
+    padding-top: 60px;
+    z-index: 2000;
+    width: 100%;
+    height: 200px;
+    background: #0A1744;
+  }
+  
+
+  .bgLoader{
+    width: 100%;
+    justify-content: center;
+    display: flex;  
+    margin-bottom: 200px;
+  } 
+
+  .textResponse{
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    text-align: center;
+  }
+
+  @media(max-width: 500px){
+    background-image: url(${mobile});
+  }
 `
 
 export const ContentInfo = styled.div`
@@ -70,6 +96,7 @@ export const InputContainer = styled.div`
   /* margin-top: 180px; */
   padding: 150px 20px 100px;
 
+ 
   @media(max-width: 500px) {
     padding-top: 100px;
   }
@@ -212,6 +239,14 @@ export const PostContent = styled.div`
   @media(max-width: 500px) {
     margin-top: 70px;
   }
+
+  /* LOADER */
+  .bgLoader{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 200px;
+  } 
 
 `
 
