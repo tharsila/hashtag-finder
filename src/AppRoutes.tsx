@@ -7,7 +7,7 @@ import {
 
 
 import Login from "./pages/login/login";
-import PostList from "./components/PostList";
+import PostList from "./pages/home";
 import { About } from "./pages/about";
 import { SearchedHashtags } from "./pages/SearchedHashtags";
 import { RequireAuth } from "./contexts/Auth/RequireAuth";

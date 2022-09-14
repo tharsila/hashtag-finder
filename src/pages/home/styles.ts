@@ -1,6 +1,160 @@
 import styled from 'styled-components';
 import background from '../../images/hero-bg.jpg';
-import mobile from '../../images/mobileHeroBg.jpg'
+import mobile from '../../images/mobileHeroBg.jpg';
+import { InfoTweet } from './index'
+
+export const Container = styled.div `
+  background-image: url(${background});
+  height: 100vh;
+  background-size: cover;
+
+  .bgResponse{
+    justify-content: center;
+    display: flex;
+    padding-top: 60px;
+    z-index: 2000;
+    width: 100%;
+    height: 200px;
+    background: #0A1744;
+  }
+  
+
+  .bgLoader{
+    width: 100%;
+    justify-content: center;
+    display: flex;  
+    margin-bottom: 200px;
+  } 
+
+  .textResponse{
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    text-align: center;
+  }
+
+  @media(max-width: 500px){
+    background-image: url(${mobile});
+  }
+`
+
+export const ContentInfo = styled.div`
+  color: #FFFFFF;
+  padding-left: 135px;
+  max-width: 1300px;
+  width: 90%;
+
+  @media(max-width: 990px) {
+    padding: 25px;
+  }
+
+  @media(max-width: 500px) {
+    width: 100%;
+  }
+
+  .space-top {
+    padding-top: 135px;
+  }
+
+  h1 {
+    font-size: 70px;
+    font-weight: bold;
+    width: 60%;
+    margin-bottom: 30px;
+    
+    @media(max-width: 990px) {
+      width: 100%;
+    }
+
+    @media(max-width: 500px) {
+      width: 100%;
+      font-size: 36px;
+    }
+  }
+
+  p {
+    font-size: 31px;
+    font-weight: 400;
+    width: 55%;
+
+    @media(max-width: 990px) {
+      width: 100%;
+    }
+    @media(max-width: 500px) {
+      font-size: 16px;
+      width: 90%;
+    }
+  }
+`
+
+
+export const InputContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 180px; */
+  padding: 150px 20px 100px;
+
+ 
+  @media(max-width: 500px) {
+    padding-top: 100px;
+  }
+`
+
+export const Input = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background: #1E3E7B;
+  border-radius: 72px;
+  padding: 15px;
+  max-width: 700px;
+  width: 100%;
+
+  @media(max-width: 500px) {
+    padding: 15px;
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    padding: 0 40px;
+    cursor: pointer;
+    @media(max-width: 500px) {
+      padding: 0 20px;
+      }
+
+    img {
+      @media(max-width: 500px) {
+        width: 10px;
+      }
+    }
+  }
+
+  input {
+    background: transparent;
+    outline: none;
+    border: none;
+    width: 100%;
+    font-size: 50px;
+    color: #8D9DA2;
+    opacity: 0.57;
+    @media(max-width: 500px) {
+      font-size: 17px;
+    }
+  }
+
+  input::placeholder {
+    font-size: 50px;
+    color: #8D9DA2;
+    opacity: 0.57;
+
+    @media(max-width: 500px) {
+      font-size: 17px;
+    }
+  }
+`
 
 type PropsImage = {
   showImage:boolean;
@@ -13,22 +167,16 @@ type PropsTweet = {
 type PropsContainer = {
   showImage:boolean;
   showTweet:boolean;
+  tweets: InfoTweet[];
 }
 
-export const Container = styled.div `
-  background-image: url(${background});
-  height: 100vh;
-  background-size: cover;
 
-    @media(max-width: 500px){
-      background-image: url(${mobile});
-    }
-`
-
-export const PostContainer = styled.section(({showImage, showTweet}:PropsContainer) => (
+export const PostContainer = styled.section(({tweets, showImage, showTweet}:PropsContainer) => (
   `
   background: #0A1744;
   padding: 150px 0;
+  display: ${tweets.length > 0 ? 'block' : 'none'};
+
   @media(max-width: 500px) {
     padding-top: 50px;
   }
@@ -92,6 +240,14 @@ export const PostContent = styled.div`
     margin-top: 70px;
   }
 
+  /* LOADER */
+  .bgLoader{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 200px;
+  } 
+
 `
 
 export const PostGrid = styled.div(({showImage}:PropsImage) => (
@@ -128,7 +284,7 @@ export const PostImg = styled.div`
   }
 `
 
-export const TwitterInfo = styled.div`
+export const TwitterInfo = styled.a`
   position: absolute;
   bottom: 10px;
   left: 25px;
