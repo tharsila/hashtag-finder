@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.js": "/static/js/main.cc9670ef.js",
-    "static/media/hero-bg.jpg": "/static/media/hero-bg.7387f69561a3fdebe1d8.jpg",
-    "static/media/mobileHeroBg.jpg": "/static/media/mobileHeroBg.947a315ff03c5172344e.jpg",
-    "static/media/about-hero-bg.jpg": "/static/media/about-hero-bg.6e1da22ba412a8f5dc98.jpg",
-    "static/media/table-bg.jpg": "/static/media/table-bg.487eb9906537771da798.jpg",
-    "static/media/tharsila.jpg": "/static/media/tharsila.85a90562b6f9f6ced282.jpg",
-    "static/media/about-ilustration.svg": "/static/media/about-ilustration.4ee1648457bb33273bc8a3e738b9c49b.svg",
-    "static/media/icon-github.svg": "/static/media/icon-github.ff2f8d180cb1b01c8445f9f26d3d9d40.svg",
-    "static/media/icon-envelope.svg": "/static/media/icon-envelope.1cf89e54143a8a914422fe6525ad2306.svg",
-    "static/media/icon-home.svg": "/static/media/icon-home.103e9249c7f181777ad3.svg",
-    "static/media/icon-awesome-linkedin.svg": "/static/media/icon-awesome-linkedin.80d2dd9dd04d925b08482f623e073e0a.svg",
-    "static/media/icon-search.svg": "/static/media/icon-search.71835400fad040fe22085bdaf45ddbd5.svg",
-    "static/media/icon-info-circle.svg": "/static/media/icon-info-circle.a0585406f44684394c6f.svg",
-    "index.html": "/index.html",
-    "static/media/icon-power-off.svg": "/static/media/icon-power-off.82d053be5fde578d148d.svg",
-    "static/media/icon-user-alt.svg": "/static/media/icon-user-alt.79fa24acb07673776e11.svg",
-    "static/media/logo.svg": "/static/media/logo.49a02989223b26d80370.svg",
-    "static/media/nada.svg": "/static/media/nada.31d6cfe0d16ae931b73c.svg",
-    "main.cc9670ef.js.map": "/static/js/main.cc9670ef.js.map"
+    "main.js": "/hashtagFinder/static/js/main.a064e8fa.js",
+    "static/media/hero-bg.jpg": "/hashtagFinder/static/media/hero-bg.7387f69561a3fdebe1d8.jpg",
+    "static/media/mobileHeroBg.jpg": "/hashtagFinder/static/media/mobileHeroBg.947a315ff03c5172344e.jpg",
+    "static/media/about-hero-bg.jpg": "/hashtagFinder/static/media/about-hero-bg.6e1da22ba412a8f5dc98.jpg",
+    "static/media/table-bg.jpg": "/hashtagFinder/static/media/table-bg.487eb9906537771da798.jpg",
+    "static/media/tharsila.jpg": "/hashtagFinder/static/media/tharsila.85a90562b6f9f6ced282.jpg",
+    "static/media/about-ilustration.svg": "/hashtagFinder/static/media/about-ilustration.4ee1648457bb33273bc8a3e738b9c49b.svg",
+    "static/media/icon-github.svg": "/hashtagFinder/static/media/icon-github.ff2f8d180cb1b01c8445f9f26d3d9d40.svg",
+    "static/media/icon-envelope.svg": "/hashtagFinder/static/media/icon-envelope.1cf89e54143a8a914422fe6525ad2306.svg",
+    "static/media/icon-home.svg": "/hashtagFinder/static/media/icon-home.103e9249c7f181777ad3.svg",
+    "static/media/icon-awesome-linkedin.svg": "/hashtagFinder/static/media/icon-awesome-linkedin.80d2dd9dd04d925b08482f623e073e0a.svg",
+    "static/media/icon-search.svg": "/hashtagFinder/static/media/icon-search.71835400fad040fe22085bdaf45ddbd5.svg",
+    "index.html": "/hashtagFinder/index.html",
+    "static/media/icon-info-circle.svg": "/hashtagFinder/static/media/icon-info-circle.a0585406f44684394c6f.svg",
+    "static/media/icon-power-off.svg": "/hashtagFinder/static/media/icon-power-off.82d053be5fde578d148d.svg",
+    "static/media/icon-user-alt.svg": "/hashtagFinder/static/media/icon-user-alt.79fa24acb07673776e11.svg",
+    "static/media/logo.svg": "/hashtagFinder/static/media/logo.49a02989223b26d80370.svg",
+    "static/media/nada.svg": "/hashtagFinder/static/media/nada.31d6cfe0d16ae931b73c.svg",
+    "main.a064e8fa.js.map": "/hashtagFinder/static/js/main.a064e8fa.js.map"
   },
   "entrypoints": [
-    "static/js/main.cc9670ef.js"
+    "static/js/main.a064e8fa.js"
   ]
 }
