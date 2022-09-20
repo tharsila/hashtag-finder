@@ -9,7 +9,7 @@ return(
     
    <div> 
         <Header>
-             <Link to="/"> 
+             <Link to="/hashtag-finder"> 
                 <Button
                 icon="icon-home.svg"
                 text="Home"
