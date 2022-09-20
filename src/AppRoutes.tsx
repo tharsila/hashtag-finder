@@ -30,7 +30,7 @@ const AppRoutes = () => {
                             <SearchedHashtags/>
                         </RequireAuth>
                     } />
-                    <Route path="/" element={<Home />} />
+                    <Route path="/hashtag-finder" element={<Home />} />
                     <Route path="/About" element={<About />} />
                 </Routes>
             </AuthProvider>

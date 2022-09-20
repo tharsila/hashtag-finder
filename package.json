@@ -2,7 +2,7 @@
   "name": "hashtag-finder",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://tharsila.github.io/hashtagFinder",
+  "homepage": "https://tharsila.github.io/hashtag-finder",
   "dependencies": {
     "@fontsource/rubik": "^4.5.11",
     "@testing-library/jest-dom": "^5.16.5",
