@@ -9,7 +9,7 @@ import {
 import Login from "./pages/login/login";
 import Home from "./pages/home";
 import { About } from "./pages/about";
-import { SearchedHashtags } from "./pages/SearchedHashtags";
+import { SearchedHashtags } from "./pages/searchedHashtags";
 import { RequireAuth } from "./contexts/Auth/RequireAuth";
 import { AuthProvider } from "./contexts/Auth/AuthProvider"
 import { LoginCheck } from "./contexts/Auth/LoginCheck";
@@ -27,7 +27,7 @@ const AppRoutes = () => {
                     } />
                     <Route path="/Hashtags" element={
                         <RequireAuth>
-                            <SearchedHashtags/>
+                            <SearchedHashtags />
                         </RequireAuth>
                     } />
                     <Route path="/hashtag-finder" element={<Home />} />

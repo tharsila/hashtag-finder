@@ -1,5 +1,5 @@
 
-import { searchedHashtags } from "../pages/SearchedHashtags";
+import { searchedHashtags } from "../pages/searchedHashtags";
 import { IUser } from "../types/User";
 
 const Airtable = require('airtable');

@@ -104,14 +104,14 @@ export const Cards = styled.div`
     justify-content: center;
     margin-top: 80px;
     margin-bottom: 150px;
-    gap: 45px;
+    gap: 50px;
     @media (max-width: 1280px) {
         flex-wrap: wrap;
     }
 `;
 
 export const Card = styled.div`
-    max-width: 266px;
+    max-width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
