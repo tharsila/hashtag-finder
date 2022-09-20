@@ -5,7 +5,7 @@ export const Header = ({ children }: { children: JSX.Element | JSX.Element[] }) 
     return (
         <C.Container>
             <C.Header>
-                <Link to="/">
+                <Link to="/hashtag-finder">
                     <C.Logo>
                         <span>hashtag</span>
                         <span id="strong">finder</span>
