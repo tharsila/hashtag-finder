@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactElement  } from 'react';
+import React, { useState, useEffect, ReactElement } from 'react';
 import * as C from './styles';
 /* interface Ts */
 import { IInfoTwitter } from '../../types/InfoTwitter'
@@ -11,11 +11,10 @@ import Card from '../../components/Card';
 import Charge from '../../components/Charge';
 
 /* twitter api */
-import { getTweets } from '../../api/GetTweets';
-import { getTweetImages } from '../../api/GetTweetsImages';
+import { getTweets, getTweetImages } from '../../api/twitterApi';
 
 /* airtable api */
-import { useApi } from "../../hooks/useApi";
+import { airtableApi } from '../../api/airtableApi';
 
 /* frame-motion */
 import { motion } from "framer-motion"
@@ -29,11 +28,11 @@ export type searchedHashtags = {
 };
 
 export type InfoTweet = {
-  photo:string;
+  photo: string;
   user: string;
-  username:string;
-  text:string;
-  id:string;
+  username: string;
+  text: string;
+  id: string;
   showTweet: boolean;
 }
 
@@ -66,7 +65,7 @@ const Home = () => {
   const [showScroll, setShowScroll] = useState<boolean>(false);
   const [animationMode, setAnimationMode] = useState(0);
 
-  const api = useApi();
+  const api = airtableApi();
 
   /* actions for mobile devices */
   const changeLink = (e: any) => {
@@ -95,9 +94,9 @@ const Home = () => {
   const asyncPost = () => {
     getTweets(searchValue, moreRequest)
       .then((tweetCall) => {
-        const tweetSet = tweetCall.data.map((tweet:any) => {
+        const tweetSet = tweetCall.data.map((tweet: any) => {
           const user = tweetCall.includes.users.find(
-            (user:any) => tweet.author_id === user.id,
+            (user: any) => tweet.author_id === user.id,
           );
           return {
             id: tweet.id,
@@ -112,13 +111,13 @@ const Home = () => {
 
         setTweets(tweetSet);
 
-        getTweetImages(searchValue, moreRequest).then((tweetImgs:any) => {
-          const imgSet = tweetImgs.data.map((tweet:any) => {
+        getTweetImages(searchValue, moreRequest).then((tweetImgs: any) => {
+          const imgSet = tweetImgs.data.map((tweet: any) => {
             const user = tweetImgs.includes.users.find(
-              (user:any) => tweet.author_id === user.id,
+              (user: any) => tweet.author_id === user.id,
             );
             const img = tweetImgs.includes.media.find(
-              (img:any) => tweet.attachments.media_keys[0] === img.media_key,
+              (img: any) => tweet.attachments.media_keys[0] === img.media_key,
             );
 
             return {
@@ -181,37 +180,37 @@ const Home = () => {
 
     setResultsNumber(resultsNumber + 5);
   }
- 
+
   /* show tweets and validations */
-  const handleValue = (e:any) => {
+  const handleValue = (e: any) => {
     if (e.keyCode === 13) {
       const asyncPost = async () => {
-        await api.getSearchedHashtags();
+        await api.postSearchedHashtags(e.target.value);
       };
-  
+
       setSearchValue(
         e.target.value.replace(/[^a-zA-Z0-9_]/g, '').replace(' ', ''),
       );
-  
+
       setSearchResponse(<Charge />);
       setResultsNumber(10);
       setMoreRequest(10);
       setShowTweet(true)
       asyncPost();
-  
+
       if (e.target.value === '') {
         setSearchResponse('É necessário digitar algo no campo de buscas!');
         setSearchValue('');
       }
     }
-  
+
     if (e.keyCode === 8) {
       setSearchResponse('');
       setSearchValue('');
       setHashTag('');
       setResultsNumber(0);
     }
-  
+
     if (e.target.value.length >= 20) {
       setSearchResponse('Limite de caracteres atingido!');
       setSearchValue('');
@@ -248,19 +247,19 @@ const Home = () => {
         <C.InputContainer>
           <C.Input>
             <button>
-              <img 
-                src={require('../../images/icon-search.svg').default} 
-                alt="" 
+              <img
+                src={require('../../images/icon-search.svg').default}
+                alt=""
                 onClick={() => {
                   let inputValue = (document.getElementById('input') as HTMLInputElement).value;
                   setSearchResponse(<Charge />);
                   setMoreRequest(10);
                   setSearchValue(
                     inputValue
-                    .replace(/[^a-zA-Z0-9_]/g, '')
-                    .replace(' ', ''),
+                      .replace(/[^a-zA-Z0-9_]/g, '')
+                      .replace(' ', ''),
                   );
-                  
+
                   if (!inputValue.length) {
                     setSearchResponse(
                       'É necessario digitar algo no campo de buscas...',
@@ -274,29 +273,29 @@ const Home = () => {
           </C.Input>
         </C.InputContainer>
         {searchResponse ? (
-            <>
-              <motion.div
-                initial={{ y: animationMode, opacity: 0 }}
-                animate={{ y: animationMode, opacity: 1 }}
-                onClick={() => setAnimationMode(animationMode)}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
-                <div className={tweets ? 'bgResponse' : 'bgLoader'}>
-                  <div className='textResponse'>{searchResponse}</div>
-                </div>
-              </motion.div>
-            </>
-          ) : null}
+          <>
+            <motion.div
+              initial={{ y: animationMode, opacity: 0 }}
+              animate={{ y: animationMode, opacity: 1 }}
+              onClick={() => setAnimationMode(animationMode)}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <div className={tweets ? 'bgResponse' : 'bgLoader'}>
+                <div className='textResponse'>{searchResponse}</div>
+              </div>
+            </motion.div>
+          </>
+        ) : null}
         <C.PostContainer tweets={tweets} showImage={showImage} showTweet={showTweet}>
           <h3>Exibindo os {moreRequest > 0 ? moreRequest - 10 : null}{' '}
-          resultados mais recentes para #{hashTag}</h3>
+            resultados mais recentes para #{hashTag}</h3>
           <div className="choose">
             <span onClick={changeLink}>Tweets</span>
             <span onClick={changeLink}>Imagens</span>
           </div>
           <C.PostContent>
             <C.PostGrid showImage={showImage}>
-              {tweetImages?.map(({user, username, img, id}:IInfoTwitter) => (
+              {tweetImages?.map(({ user, username, img, id }: IInfoTwitter) => (
                 <C.PostImg key={id}>
                   <img src={img} alt={user} />
                   <C.TwitterInfo>
@@ -307,7 +306,7 @@ const Home = () => {
               ))}
             </C.PostGrid>
             <C.PostCardContainer showTweet={showTweet}>
-              {tweets.map(({user, username, text, id, photo }: InfoTweet) => (
+              {tweets.map(({ user, username, text, id, photo }: InfoTweet) => (
                 <Card
                   key={id}
                   showTweet={showTweet}
@@ -316,19 +315,19 @@ const Home = () => {
                   text={text}
                   photo={photo}
                   id={id}
-                  />
+                />
               ))}
             </C.PostCardContainer>
-                {loading ? (
-                <motion.div
-                  initial={{ y: animationMode, opacity: 1 }}
-                  animate={{ y: animationMode, opacity: 0 }}
-                  onClick={() => setAnimationMode(animationMode)}
-                  transition={{ duration: 0.7, delay: 0.4 }}
-                  className='bgLoader'
-                >
-                  <Charge />
-                </motion.div>
+            {loading ? (
+              <motion.div
+                initial={{ y: animationMode, opacity: 1 }}
+                animate={{ y: animationMode, opacity: 0 }}
+                onClick={() => setAnimationMode(animationMode)}
+                transition={{ duration: 0.7, delay: 0.4 }}
+                className='bgLoader'
+              >
+                <Charge />
+              </motion.div>
             ) : null}
           </C.PostContent>
         </C.PostContainer>

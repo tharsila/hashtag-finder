@@ -65,10 +65,11 @@ export const TableTitle = styled.span(({ fontSize }: { fontSize: number }) => (`
     }
 `));
 
-export const Table = styled.div`
+export const Table = styled.div(({ isListEnd }: { isListEnd: boolean }) => (`
     width: 100%;
     margin-top: 40px;
-`;
+    margin-bottom: ${isListEnd ? '80px' : '0px'};
+`));
 
 export const Head = styled.div`
     position: relative;

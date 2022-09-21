@@ -9,11 +9,13 @@ const base = new Airtable({
 
 const squad = "06-22"
 
-export const useApi = () => ({
+export const airtableApi = () => ({
     getSearchedHashtags: async () => {
         let response = await base("Buscas")
-        .select({ filterByFormula: `Squad = "${squad}"` })
-        .all();
+        .select({ 
+            filterByFormula: `Squad = "${squad}"`,
+            sort: [{field: "Data", direction: "desc"}]
+        }).all();
 
         let hashtags: searchedHashtags[] = [];
         for(let i in response) {
@@ -25,6 +27,14 @@ export const useApi = () => ({
         }
 
         return hashtags;
+    },
+    postSearchedHashtags: async (hashtag: string) => {
+        console.log(hashtag)
+        await base("Buscas").create({
+            Squad: `${squad}`,
+            Hashtag: `${hashtag}`,
+            Data: Date.now()
+        })
     },
     getProjectInfo: async () => {
         let response = await base("Projeto")
@@ -56,5 +66,13 @@ export const useApi = () => ({
             }
             return teamUsers;
         }
+    },
+    signIn: async (Email: string, Senha: string) => {
+        let response = await base("Login")
+        .select({ filterByFormula: `Squad = "${ squad }"`})
+        .firstPage();
+
+        console.log(response[0]);
+        return response[0].fields;
     }
 });

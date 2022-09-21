@@ -1,24 +1,18 @@
-const addLeadingZero = (value: number) => value < 10 ? `0${value}` : value;
-
 export const useDate = () => ({
     getDate: (timestamp: number) => {
-        const dateRaw = new Date(timestamp * 1000);
+        const dateRaw = new Date(timestamp);
 
-        let day = dateRaw.getDay();
-        let month = dateRaw.getMonth();
+        const day = `0${dateRaw.getDate()}`.slice(-2);
+        const month = `0${dateRaw.getMonth() + 1}`.slice(-2)
 
-        let date = `${addLeadingZero(day)}/${addLeadingZero(month)}`;
-
-        return date;
+        return `${day}/${month}`;
     },
     getHours: (timestamp: number) => {
-        const dateRaw = new Date(timestamp * 1000);
+        const dateRaw = new Date(timestamp);
         
-        let hour = dateRaw.getHours();
-        let minutes = dateRaw.getMinutes();
+        const hour = `0${dateRaw.getHours()}`.slice(-2);
+        const minutes = `0${dateRaw.getMinutes()}`.slice(-2);
 
-        let hours = `${addLeadingZero(hour)}:${addLeadingZero(minutes)}`;
-
-        return hours;
+        return `${hour}:${minutes}`;
     }
 });

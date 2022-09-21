@@ -6,7 +6,7 @@ import emailIcon from '../../images/icon-envelope.svg';
 import linkedinIcon from '../../images/icon-awesome-linkedin.svg';
 import { Header } from '../../components/Header';
 import { Button } from '../../components/Button';
-import { useApi } from '../../hooks/useApi';
+import { airtableApi } from '../../api/airtableApi';
 import { useEffect, useState } from 'react';
 import { IUser } from '../../types/User';
 import { Circles } from 'react-loader-spinner';
@@ -19,7 +19,7 @@ type ProjectData = {
 }
 
 export const About = () => {
-    const api = useApi();
+    const api = airtableApi();
     const [projectData, setProjectData] = useState<ProjectData>();
     const [isLoading, setIsLoading] = useState(true);
 

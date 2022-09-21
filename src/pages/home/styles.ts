@@ -5,8 +5,11 @@ import { InfoTweet } from './index'
 
 export const Container = styled.div `
   background-image: url(${background});
-  height: 100vh;
+  min-height: 100vh;
   background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .bgResponse{
     justify-content: center;
@@ -40,10 +43,10 @@ export const Container = styled.div `
 `
 
 export const ContentInfo = styled.div`
+  margin: 50px auto;
   color: #FFFFFF;
-  padding-left: 135px;
   max-width: 1300px;
-  width: 90%;
+  width: 95%;
 
   @media(max-width: 990px) {
     padding: 25px;

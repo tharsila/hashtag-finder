@@ -1,10 +1,11 @@
 import { useEffect, useState, useContext } from "react";
 import { Circles } from "react-loader-spinner";
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import { Link } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
-import { useApi } from "../../hooks/useApi";
+import { airtableApi } from "../../api/airtableApi";
 import { useDate } from "../../hooks/useDate";
 import * as C from "./styles";
 
@@ -15,10 +16,14 @@ export type searchedHashtags = {
 
 export const SearchedHashtags = () => {
     const [isLoading, setIsLoading] = useState(true);
+    const [isListEnd, setIsListEnd] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
     const [searchedHashtags, setSearchedHashtags] = useState<searchedHashtags[]>();
-    const api = useApi();
+    const api = airtableApi();
     const date = useDate();
-    const Logout = useContext( AuthContext )
+    const logout = useContext(AuthContext);
+
+    const scrollRef = useBottomScrollListener(handleScroll);
 
     useEffect(() => {
         (async () => {
@@ -30,9 +35,21 @@ export const SearchedHashtags = () => {
         })();
     }, [api]);
 
-    const handleClick =  (e: React.MouseEvent<HTMLButtonElement>) => { 
+    useEffect(() => {
+        if (searchedHashtags) {
+            currentPage * 10 >= searchedHashtags.length && setIsListEnd(true);
+        }
+    }, [currentPage]);
+
+    function handleLogout(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
-       Logout.signOut();
+        logout.signOut();
+    }
+
+    function handleScroll() {
+        setTimeout(() => {
+            setCurrentPage(currentPage + 1);
+        }, 500);
     }
 
     return (
@@ -47,7 +64,7 @@ export const SearchedHashtags = () => {
                     />
                 </Link>
                 <Button
-                    handleClick = { handleClick }
+                    handleClick={handleLogout}
                     icon="icon-power-off.svg"
                     text="SAIR"
                     color="#FFF"
@@ -66,7 +83,7 @@ export const SearchedHashtags = () => {
                 />) :
                 (<C.TableArea>
                     <C.Title fontSize={40}>Buscas realizadas</C.Title>
-                    <C.Table>
+                    <C.Table isListEnd={isListEnd}>
                         <C.Head>
                             <C.TableTitle fontSize={24}>Hashtag</C.TableTitle>
                             <C.TableTitle fontSize={24}>Data</C.TableTitle>
@@ -74,9 +91,9 @@ export const SearchedHashtags = () => {
                         </C.Head>
                         <C.Body>
                             {searchedHashtags && searchedHashtags.length > 0 &&
-                                searchedHashtags.map((hashtag, index) => (
+                                searchedHashtags.slice(0, currentPage * 10).map((hashtag, index) => (
                                     <C.Row key={index}>
-                                        <span>{hashtag.hashtag}</span>
+                                        <span>#{hashtag.hashtag.replace(/\s/g, '')}</span>
                                         <span>{date.getDate(hashtag.data)}</span>
                                         <span>{date.getHours(hashtag.data)}</span>
                                     </C.Row>
@@ -84,6 +101,6 @@ export const SearchedHashtags = () => {
                         </C.Body>
                     </C.Table>
                 </C.TableArea>)}
-        </C.Container >
+        </C.Container>
     );
 };
