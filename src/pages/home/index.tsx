@@ -183,7 +183,7 @@ const Home = () => {
 
   /* show tweets and validations */
   const handleValue = (e: any) => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 && e.target.value !== '') {
       const asyncPost = async () => {
         await api.postSearchedHashtags(e.target.value);
       };

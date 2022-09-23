@@ -17,39 +17,58 @@ export type searchedHashtags = {
 export const SearchedHashtags = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isListEnd, setIsListEnd] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [lastSearchedHashtagDate, setLastSearchedHashtagDate] = useState(0);
     const [searchedHashtags, setSearchedHashtags] = useState<searchedHashtags[]>();
     const api = airtableApi();
     const date = useDate();
     const logout = useContext(AuthContext);
 
-    const scrollRef = useBottomScrollListener(handleScroll);
-
     useEffect(() => {
         (async () => {
-            const response: searchedHashtags[] | undefined = await api.getSearchedHashtags();
+            const response = await api.getSearchedHashtags();
+            setSearchedHashtags(response);
 
-            response && setSearchedHashtags(response);
+            setLastSearchedHashtagDate(response[response.length - 1].data)
 
             setIsLoading(false);
-        })();
-    }, [api]);
 
-    useEffect(() => {
-        if (searchedHashtags) {
-            currentPage * 10 >= searchedHashtags.length && setIsListEnd(true);
+            response.length < 10 && setIsListEnd(true);
+        })();
+    }, []);
+
+    useBottomScrollListener(handleScroll);
+
+    async function getSearchedHashtags(lastSearchedHashtagDate: number) {
+        const response: searchedHashtags[] = await api.getSearchedHashtags(lastSearchedHashtagDate);
+
+        if (response.length > 0) {
+            response.length < 10 && setIsListEnd(true);
+
+            if (searchedHashtags) {
+                let currentSearchedHashtags = [...searchedHashtags];
+
+                for (let i in response) {
+                    currentSearchedHashtags.push(response[i]);
+                }
+
+                setSearchedHashtags(currentSearchedHashtags);
+            } else {
+                setSearchedHashtags(response);
+            }
+
+            setLastSearchedHashtagDate(response[response.length - 1].data);
+        } else {
+            setIsListEnd(true);
         }
-    }, [currentPage]);
+    }
+
+    function handleScroll() {
+        !isListEnd && getSearchedHashtags(lastSearchedHashtagDate);
+    }
 
     function handleLogout(e: React.MouseEvent<HTMLButtonElement>) {
         e.preventDefault();
         logout.signOut();
-    }
-
-    function handleScroll() {
-        setTimeout(() => {
-            setCurrentPage(currentPage + 1);
-        }, 500);
     }
 
     return (
@@ -91,7 +110,7 @@ export const SearchedHashtags = () => {
                         </C.Head>
                         <C.Body>
                             {searchedHashtags && searchedHashtags.length > 0 &&
-                                searchedHashtags.slice(0, currentPage * 10).map((hashtag, index) => (
+                                searchedHashtags.map((hashtag, index) => (
                                     <C.Row key={index}>
                                         <span>#{hashtag.hashtag.replace(/\s/g, '')}</span>
                                         <span>{date.getDate(hashtag.data)}</span>

@@ -10,11 +10,12 @@ const base = new Airtable({
 const squad = "06-22"
 
 export const airtableApi = () => ({
-    getSearchedHashtags: async () => {
+    getSearchedHashtags: async (lastSearchedHashtagDate?: number) => {
         let response = await base("Buscas")
         .select({ 
-            filterByFormula: `Squad = "${squad}"`,
-            sort: [{field: "Data", direction: "desc"}]
+            filterByFormula: lastSearchedHashtagDate ? `AND(Squad = "${squad}", Data < "${lastSearchedHashtagDate}")` : `Squad = "${squad}"`,
+            sort: [{field: "Data", direction: "desc"}],
+            maxRecords: 10
         }).all();
 
         let hashtags: searchedHashtags[] = [];
@@ -29,12 +30,11 @@ export const airtableApi = () => ({
         return hashtags;
     },
     postSearchedHashtags: async (hashtag: string) => {
-        console.log(hashtag)
         await base("Buscas").create({
             Squad: `${squad}`,
             Hashtag: `${hashtag}`,
             Data: Date.now()
-        })
+        });
     },
     getProjectInfo: async () => {
         let response = await base("Projeto")
@@ -72,7 +72,6 @@ export const airtableApi = () => ({
         .select({ filterByFormula: `Squad = "${ squad }"`})
         .firstPage();
 
-        console.log(response[0]);
         return response[0].fields;
     }
 });
