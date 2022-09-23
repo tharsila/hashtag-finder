@@ -108,3 +108,37 @@ margin-right: auto;
     text-transform: uppercase;
     margin-top: 32px;
 }`
+
+export const ErrorMessage = styled.div `
+color: #72EFDB;
+font-size: 11px;
+text-shadow: black 0.1em 0.1em 0.2em
+`
+
+export const ErrorMessageCredentials = styled(ErrorMessage)`
+margin-top: 1em;
+font-size: 21px;
+position: fixed;
+`
+
+export const Modal = styled.div`
+width: 60vh;
+height: 42vh;
+position: absolute;
+display: flex;
+align-items: center;
+justify-content: center;
+bottom: 87px;
+background-color: #ffffff1f;
+backdrop-filter: blur(10px);
+`
+
+export const CloseButton = styled(Button)`
+position: relative;
+bottom: 6rem;
+right: 7rem;
+width: 68px;
+height: 27px;
+color: black;
+text-shadow: #333 0.1em 0.1em 0.2em
+`
