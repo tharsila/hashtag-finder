@@ -1,8 +1,7 @@
-
-import { searchedHashtags } from "../pages/searchedHashtags";
 import { IUser } from "../types/User";
 
 const Airtable = require('airtable');
+
 const base = new Airtable({
     apiKey: process.env.REACT_APP_API_KEY
 }).base("app6wQWfM6eJngkD4");
@@ -10,25 +9,6 @@ const base = new Airtable({
 const squad = "06-22"
 
 export const airtableApi = () => ({
-    getSearchedHashtags: async (lastSearchedHashtagDate?: number) => {
-        let response = await base("Buscas")
-        .select({ 
-            filterByFormula: lastSearchedHashtagDate ? `AND(Squad = "${squad}", Data < "${lastSearchedHashtagDate}")` : `Squad = "${squad}"`,
-            sort: [{field: "Data", direction: "desc"}],
-            maxRecords: 10
-        }).all();
-
-        let hashtags: searchedHashtags[] = [];
-        for(let i in response) {
-            let currentHashtag = {
-                data: response[i].fields.Data,
-                hashtag: response[i].fields.Hashtag,
-            }
-            hashtags.push(currentHashtag);
-        }
-
-        return hashtags;
-    },
     postSearchedHashtags: async (hashtag: string) => {
         await base("Buscas").create({
             Squad: `${squad}`,

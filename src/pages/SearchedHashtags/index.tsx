@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
 import { AuthContext } from "../../contexts/Auth/AuthContext";
-import { airtableApi } from "../../api/airtableApi";
 import { useDate } from "../../hooks/useDate";
 import * as C from "./styles";
+import axios from "axios";
 
 export type searchedHashtags = {
     data: number;
@@ -15,60 +15,59 @@ export type searchedHashtags = {
 };
 
 export const SearchedHashtags = () => {
+    const url = 'https://api.airtable.com/v0/app6wQWfM6eJngkD4/Buscas?filterByFormula=%7BSquad%7D+%3D+"06-22"&pageSize=10&view=Grid%20view&sort%5B0%5D%5Bfield%5D=Data&sort%5B0%5D%5Bdirection%5D=desc&';
+    const [searchedHashtags, setSearchedHashtags] = useState<searchedHashtags[]>();
     const [isLoading, setIsLoading] = useState(true);
     const [isListEnd, setIsListEnd] = useState(false);
-    const [lastSearchedHashtagDate, setLastSearchedHashtagDate] = useState(0);
-    const [searchedHashtags, setSearchedHashtags] = useState<searchedHashtags[]>();
-    const api = airtableApi();
+    const [offset, setOffset] = useState<number>();
     const date = useDate();
-    const logout = useContext(AuthContext);
-
-    useEffect(() => {
-        (async () => {
-            const response = await api.getSearchedHashtags();
-            setSearchedHashtags(response);
-
-            setLastSearchedHashtagDate(response[response.length - 1].data)
-
-            setIsLoading(false);
-
-            response.length < 10 && setIsListEnd(true);
-        })();
-    }, []);
+    const auth = useContext(AuthContext);
 
     useBottomScrollListener(handleScroll);
 
-    async function getSearchedHashtags(lastSearchedHashtagDate: number) {
-        const response: searchedHashtags[] = await api.getSearchedHashtags(lastSearchedHashtagDate);
+    useEffect(() => { // get the first ten hashtags
+        (async () => {
+            await getSearchedHashtags();
+            setIsLoading(false);
+        })();
+    }, [])
 
-        if (response.length > 0) {
-            response.length < 10 && setIsListEnd(true);
+    async function getSearchedHashtags(offset?: number) {
 
-            if (searchedHashtags) {
-                let currentSearchedHashtags = [...searchedHashtags];
+        let hashtags = searchedHashtags ? [...searchedHashtags] : [];
 
-                for (let i in response) {
-                    currentSearchedHashtags.push(response[i]);
-                }
-
-                setSearchedHashtags(currentSearchedHashtags);
-            } else {
-                setSearchedHashtags(response);
+        await axios.get(`${url}${offset && `offset=${offset}`}`, {
+            headers: {
+                Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
             }
+        }).then(response => {
+            !response.data.offset && setIsListEnd(true); // if the offset does not exist the list is over
 
-            setLastSearchedHashtagDate(response[response.length - 1].data);
-        } else {
-            setIsListEnd(true);
-        }
+            if (response.data.records.length > 0) {
+                response.data.records.length < 10 && setIsListEnd(true); // is looking for 10 hashtags so if less comes the list is over
+
+                for (let i in response.data.records) {
+                    let currentHashtag = {
+                        data: response.data.records[i].fields.Data,
+                        hashtag: response.data.records[i].fields.Hashtag,
+                    }
+                    hashtags.push(currentHashtag);
+                }
+                setSearchedHashtags(hashtags);
+                setOffset(response.data.offset);
+            } else {
+                setIsListEnd(true);
+            }
+        }).catch(error => console.log(error));
     }
 
-    function handleScroll() {
-        !isListEnd && getSearchedHashtags(lastSearchedHashtagDate);
+    function handleScroll() { // calls the function to get 10 more hashtags when the scroll hits the bottom
+        !isListEnd && getSearchedHashtags(offset);
     }
 
-    function handleLogout(e: React.MouseEvent<HTMLButtonElement>) {
-        e.preventDefault();
-        logout.signOut();
+    function handleLogout(event: React.MouseEvent<HTMLButtonElement>) {
+        event.preventDefault();
+        auth.signOut();
     }
 
     return (
