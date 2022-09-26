@@ -1,11 +1,9 @@
-import React, { useState, useContext } from "react";
-import { ButtonForm, Form, H3, Input } from "./styles";
+import React, { useState, useContext, ReactElement } from "react";
+import { ButtonForm, CloseButton, ErrorMessage, ErrorMessageCredentials, Form, H3, Input, Modal } from "./styles";
 import validator from 'validator';
 import { AuthContext } from "../../../contexts/Auth/AuthContext";
 import {  useNavigate } from "react-router-dom";
-import { Header } from "../../../components/Header/index"
-import { Button } from "../../../components/Button/index";
-import { Link } from "react-router-dom";
+
 
 
 
@@ -17,6 +15,10 @@ const LoginUser = () => {
     const [password, setPassword] = useState("");
     const auth = useContext( AuthContext );
     const navigate = useNavigate();
+    const [validateInput, setValidateInput] = useState<string | ReactElement>('')
+    const [validateEmail, setValidateEmail] = useState<string | ReactElement>('')
+    const [validateCredentials, setValidateCredentials] = useState<string | ReactElement>('')
+    
 
 
         //function that validates email 
@@ -25,17 +27,18 @@ const LoginUser = () => {
             if (validator.isEmail(testEmail)) {
                 setEmail(testEmail);
             } else if(testEmail === ""){
-                alert("Email field cannot be empty")
+               setValidateEmail("O campo Email não pode ficar vazio!")
             } else {
-                alert("Enter a valid e-mail")
+                setValidateEmail("Entre com um email válido !")
                 e.target.value = ""
         }
+        setValidateCredentials("")
     };
 
         //Funtion for set password user//
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => { 
             if(e.target.value === ""){
-                alert("Password field cannot be empty")
+                setValidateInput("O campo de senha não pode ficar vazio!")
             } else {
             setPassword(e.target.value);
             }
@@ -50,29 +53,48 @@ const LoginUser = () => {
                 navigate('/Hashtags');
                 console.log(isLogged)
             } else {
-                alert("Unable to login, please check your credentials")
+                setValidateCredentials("verifique suas credenciais!")
             }
         }
     };
     
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form autoComplete="off" onSubmit={handleSubmit}>
             <H3>Login</H3>
+            {validateEmail ? (
+                <>
+                <ErrorMessage>{ validateEmail }</ErrorMessage>
+                </>
+            ): null }
             <Input type="email"
                 placeholder="Usuário"
                 name="e-mail"
                 onBlur = {(e) => { handleEmailChange(e) }}
                 value = {email}
                 onChange = {(e) => setEmail(e.target.value) }
+                onClick = {(e) => setValidateEmail("")}
             />
+            {validateInput ?(
+                <>
+                <ErrorMessage>{ validateInput }</ErrorMessage>
+                </>
+            ): null }
+
             <Input type="password"
                 name="Password"
                 placeholder="Senha"
                 onBlur = {(e) => { handlePasswordChange(e) }}
                 onChange = {(e) => setPassword(e.target.value)}
+                onClick = {(e) => setValidateInput("")}
             />
             <ButtonForm type="submit">ACESSAR</ButtonForm>
+            {validateCredentials ? (
+                <Modal> 
+                    <CloseButton onClick={(e) => setValidateCredentials("")}>X</CloseButton>
+                <ErrorMessageCredentials>{ validateCredentials }</ErrorMessageCredentials>
+                </Modal>
+            ): null}
         </Form>
     );
 
