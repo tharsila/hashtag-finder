@@ -119,7 +119,7 @@ export const About = () => {
                                             {person.description}
                                         </C.Text>
                                         <C.Icons>
-                                            <a href={person.github}>
+                                            <a href={person.github} target="blank">
                                                 <img
                                                     src={githubIcon}
                                                     alt="GitHub icon"
@@ -131,7 +131,7 @@ export const About = () => {
                                                     alt="Email icon"
                                                 />
                                             </a>
-                                            <a href={person.linkedin}>
+                                            <a href={person.linkedin} target="blank">
                                                 <img
                                                     src={linkedinIcon}
                                                     alt="LinkedIn icon"
