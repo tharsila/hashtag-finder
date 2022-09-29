@@ -6,7 +6,6 @@ import { InfoTweet } from './index'
 export const Container = styled.div `
   background-image: url(${background});
   min-height: 100vh;
-  background-size: cover;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
