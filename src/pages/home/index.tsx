@@ -187,8 +187,8 @@ const Home = () => {
           await api.postSearchedHashtags(e.target.value);
         };
       
-
-      setSearchValue(
+        setShowTweet(true)
+        setSearchValue(
         e.target.value.replace(/[^a-zA-Z0-9_]/g, "").replace(" ", "")
       );
 
@@ -252,6 +252,7 @@ const Home = () => {
                   let inputValue = (document.getElementById('input') as HTMLInputElement).value;
                   setSearchResponse(<Charge />);
                   setMoreRequest(10);
+                  setShowTweet(true)
                   setSearchValue(
                     inputValue
                       .replace(/[^a-zA-Z0-9_]/g, '')
