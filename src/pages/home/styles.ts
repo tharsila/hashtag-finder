@@ -5,34 +5,34 @@ import { InfoTweet } from './index'
 
 export const Container = styled.div `
   background-image: url(${background});
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-size: cover;
 
   .bgResponse{
     justify-content: center;
     display: flex;
-    padding-top: 60px;
     z-index: 2000;
     width: 100%;
-    height: 200px;
+    padding: 10px;
     background: #0A1744;
+    color: #ffffff;
   }
   
 
   .bgLoader{
     width: 100%;
     justify-content: center;
-    display: flex;  
-    margin-bottom: 200px;
+    display: flex; 
+    background: #0A1744;
   } 
 
   .textResponse{
     font-size: 24px;
     display: flex;
     justify-content: center;
-    margin: 5px;
     text-align: center;
   }
 
@@ -42,10 +42,10 @@ export const Container = styled.div `
 `
 
 export const ContentInfo = styled.div`
-  margin: 50px auto;
+  margin: 0 auto;
   color: #FFFFFF;
   max-width: 1300px;
-  width: 95%;
+  width: 100%;
 
   @media(max-width: 990px) {
     padding: 25px;
@@ -62,7 +62,7 @@ export const ContentInfo = styled.div`
   h1 {
     font-size: 70px;
     font-weight: bold;
-    width: 60%;
+    width: 55%;
     margin-bottom: 30px;
     
     @media(max-width: 990px) {
@@ -78,7 +78,7 @@ export const ContentInfo = styled.div`
   p {
     font-size: 31px;
     font-weight: 400;
-    width: 55%;
+    width: 50%;
 
     @media(max-width: 990px) {
       width: 100%;
@@ -90,17 +90,15 @@ export const ContentInfo = styled.div`
   }
 `
 
-
 export const InputContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   /* margin-top: 180px; */
-  padding: 150px 20px 100px;
+  padding: 50px 20px 50px;
 
- 
   @media(max-width: 500px) {
-    padding-top: 100px;
+    padding-bottom: 100px;
   }
 `
 
@@ -177,6 +175,7 @@ export const PostContainer = styled.section(({tweets, showImage, showTweet}:Prop
   `
   background: #0A1744;
   padding: 150px 0;
+  height: 100%;
   display: ${tweets.length > 0 ? 'block' : 'none'};
 
   @media(max-width: 500px) {
