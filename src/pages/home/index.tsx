@@ -78,85 +78,66 @@ const Home = () => {
     }
   }
 
+  const asyncCall = async () => {
+    const tweetcall = await getTweets(searchValue, moreRequest);
+    const tweetImgs = await getTweetImages(searchValue, moreRequest);
+    console.log(tweetcall.data)
+    if (!tweetcall.data) {
+      return setSearchResponse("Nenhum tweet foi achado!");
+    }
+
+    if (tweetcall.data.length >= 100) {
+      return
+    }
+    
+
+    const imgSet = tweetImgs.data.map((tweet: any | undefined) => {
+      const user = tweetImgs.includes.users.find(
+        (user: any | undefined) => tweet.author_id === user.id,
+      );
+      const img = tweetImgs.includes.media.find(
+        (img: any | undefined) => tweet.attachments.media_keys[0] === img.media_key,
+      );
+
+      return {
+        id: tweet.id,
+        img: img.url,
+        username: user.username,
+        user: user.name,
+      };
+    });
+
+    const tweetSet = tweetcall.data.map((tweet:any) => {
+      const user = tweetcall.includes.users.find(
+        (user:any) => tweet.author_id === user.id
+      );
+
+      return {
+        id: tweet.id,
+        text: tweet.text,
+        username: user.username,
+        user: user.name,
+        photo: user.profile_image_url,
+      };
+    });
+
+    setTweetImages(imgSet);
+    setTweets(tweetSet);
+    setHashTag(searchValue);
+    setMoreRequest(moreRequest + 10);
+  };
+
   useEffect(() => {
     if (searchValue) {
-      asyncPost();
+      asyncCall();
       return () => {
         if (tweets) {
         }
-        setSearchResponse('');
-        setSearchValue('');
+        setSearchResponse("");
+        setSearchValue("");
       };
     }
   });
-
-  /* req twitter api */
-  const asyncPost = () => {
-    getTweets(searchValue, moreRequest)
-      .then((tweetCall) => {
-        const tweetSet = tweetCall.data.map((tweet: any) => {
-          const user = tweetCall.includes.users.find(
-            (user: any) => tweet.author_id === user.id,
-          );
-          return {
-            id: tweet.id,
-            text: tweet.text,
-            username: user.username,
-            user: user.name,
-            photo: user.profile_image_url,
-          };
-        });
-
-        setImageActive(false);
-
-        setTweets(tweetSet);
-
-        getTweetImages(searchValue, moreRequest).then((tweetImgs: any) => {
-          const imgSet = tweetImgs.data.map((tweet: any) => {
-            const user = tweetImgs.includes.users.find(
-              (user: any) => tweet.author_id === user.id,
-            );
-            const img = tweetImgs.includes.media.find(
-              (img: any) => tweet.attachments.media_keys[0] === img.media_key,
-            );
-
-            return {
-              id: tweet.id,
-              img: img.url,
-              username: user.username,
-              user: user.name,
-            };
-          });
-
-          setTweetImages(imgSet);
-          setHashTag(searchValue);
-          setMoreRequest(moreRequest + 10);
-        });
-      })
-      .catch(() => {
-        setSearchResponse('Nenhum tweet foi encontrado, tente novamente!');
-        setTweets([]);
-      });
-  };
-
-  useEffect(() => {
-    const win: Window = window
-
-    if (tweets) {
-      win.addEventListener('scroll', handleScroll);
-    }
-
-    win.addEventListener('scroll', checkScrollTop);
-  }, []);
-
-
-  const checkScrollTop: any = () => {
-    if (!showScroll && window.pageYOffset > 400) {
-      setShowScroll(true);
-    } else if (showScroll && window.pageYOffset <= 400) {
-      setShowScroll(false);
-    }
-  };
 
   const handleScroll = () => {
     if (tweets) {
@@ -165,58 +146,75 @@ const Home = () => {
         document.documentElement.scrollHeight;
       if (bottom) {
         setLoading(true);
-        fetchMoreData()
+        const fetchMoreData = () => {
+          const newSearch = (document.getElementById('input') as HTMLInputElement).value;
+          setSearchValue(newSearch);
+      
+          setResultsNumber(resultsNumber + 5);
+        }
         setTimeout(() => setLoading(false), 2000);
         setTimeout(() => fetchMoreData(), 1500);
         setTimeout(() => setTopButton(true), 3000);
       }
     }
-  };
-
-  /* show next tweets */
-  function fetchMoreData() {
-    const newSearch = (document.getElementById('input') as HTMLInputElement).value;
-    setSearchValue(newSearch);
-
-    setResultsNumber(resultsNumber + 5);
   }
 
-  /* show tweets and validations */
-  const handleValue = (e: any) => {
-    if (e.keyCode === 13 && e.target.value !== '') {
-      const asyncPost = async () => {
-        await api.postSearchedHashtags(e.target.value);
+  useEffect(() => {
+    if (tweets) {
+      const checkScrollTop = () => {
+        if (!showScroll && window.pageYOffset > 400) {
+          setShowScroll(true);
+        } else if (showScroll && window.pageYOffset <= 400) {
+          setShowScroll(false);
+        }
       };
 
-      setSearchValue(
-        e.target.value.replace(/[^a-zA-Z0-9_]/g, '').replace(' ', ''),
+      window.addEventListener("scroll", checkScrollTop);
+      window.addEventListener("scroll", handleScroll, {
+        passive: true,
+      });
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [loading]);
+
+  function handleValue(e:any) {
+    if (e.keyCode === 13) {
+      if (e.keyCode === 13 && e.target.value !== '') {
+        const asyncPost = async () => {
+          await api.postSearchedHashtags(e.target.value);
+        };
+      
+        setShowTweet(true)
+        setSearchValue(
+        e.target.value.replace(/[^a-zA-Z0-9_]/g, "").replace(" ", "")
       );
 
       setSearchResponse(<Charge />);
       setResultsNumber(10);
       setMoreRequest(10);
-      setShowTweet(true)
+
       asyncPost();
 
-      if (e.target.value === '') {
+      if (e.target.value === "") {
         setSearchResponse('É necessário digitar algo no campo de buscas!');
-        setSearchValue('');
+        setSearchValue("");
       }
-    }
+    }}
 
     if (e.keyCode === 8) {
-      setSearchResponse('');
-      setSearchValue('');
-      setHashTag('');
+      setSearchResponse("");
+      setSearchValue("");
+      setHashTag("");
       setResultsNumber(0);
     }
 
     if (e.target.value.length >= 20) {
       setSearchResponse('Limite de caracteres atingido!');
-      setSearchValue('');
     }
-  };
-
+  }
 
   return (
     <>
@@ -254,6 +252,7 @@ const Home = () => {
                   let inputValue = (document.getElementById('input') as HTMLInputElement).value;
                   setSearchResponse(<Charge />);
                   setMoreRequest(10);
+                  setShowTweet(true)
                   setSearchValue(
                     inputValue
                       .replace(/[^a-zA-Z0-9_]/g, '')
@@ -306,7 +305,7 @@ const Home = () => {
               ))}
             </C.PostGrid>
             <C.PostCardContainer showTweet={showTweet}>
-              {tweets.map(({ user, username, text, id, photo }: InfoTweet) => (
+              {tweets?.map(({ user, username, text, id, photo }: InfoTweet) => (
                 <Card
                   key={id}
                   showTweet={showTweet}
@@ -318,7 +317,7 @@ const Home = () => {
                 />
               ))}
             </C.PostCardContainer>
-            {loading ? (
+            {/* {loading ? (
               <motion.div
                 initial={{ y: animationMode, opacity: 1 }}
                 animate={{ y: animationMode, opacity: 0 }}
@@ -328,7 +327,7 @@ const Home = () => {
               >
                 <Charge />
               </motion.div>
-            ) : null}
+            ) : null} */}
           </C.PostContent>
         </C.PostContainer>
         <Footer />

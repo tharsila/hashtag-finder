@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import { AuthContext } from "./AuthContext"
-import { SearchedHashtags } from "../../pages/searchedHashtags/index"
+import { SearchedHashtags } from "../../pages/SearchedHashtags/index"
 
 
 export const LoginCheck = ({ children }: { children: JSX.Element }) => {
